@@ -136,8 +136,13 @@
 
         checkInDate:"",
         checkOutDate:"",
-        roomType: ""
+        roomType: "",
+        id:"",
       };
+    },
+    created(){
+      this.id = this.$route.params.id;
+      console.log(this.id)
     },
     mounted() {
       this.memberInfo()
@@ -165,13 +170,12 @@
       },
       async reservationInfo() {
         try {
-          const response = await axios.get(`/reserve/room/list`);
-          const reservations = response.data.content;
-          const lastReservation = reservations[reservations.length - 1];
-
-          this.checkInDate = lastReservation.checkInDate;
-          this.checkOutDate = lastReservation.checkOutDate;
-          this.roomType = lastReservation.roomType;
+          const response = await axios.get(`/reserve/room/detail/${this.id}`);
+          const reservations = response.data.result;
+          console.log(reservations)
+          this.checkInDate = reservations.checkInDate;
+          this.checkOutDate = reservations.checkOutDate;
+          this.roomType = reservations.roomType;
         } catch(e) {
           if (e.response) {
               console.error("Error Status:", e.response.status);  

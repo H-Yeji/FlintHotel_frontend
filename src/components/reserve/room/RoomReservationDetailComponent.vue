@@ -258,8 +258,9 @@
                 };
                 console.log(JSON.stringify(data));
 
-                await axios.post(`${process.env.VUE_APP_API_BASE_URL}/reserve/room`, data, {headers});
+                const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/reserve/room`, data, {headers});
                 console.log("예약 성공");
+                console.log(response.data.result);
 
                 // localstorage에 예약정보 클리어
                 localStorage.removeItem('checkInDate');
@@ -267,7 +268,7 @@
                 localStorage.removeItem('numAdults');
                 localStorage.removeItem('numChildren');
                 localStorage.removeItem('selectedRoom');
-                this.$router.push('/reserve/room/success');
+                this.$router.push(`/reserve/room/success/` + response.data.result.id);
             } catch(e) {
                 if (e.response) {
                     console.error("Error Status:", e.response.status);  

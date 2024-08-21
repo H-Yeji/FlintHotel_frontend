@@ -16,7 +16,7 @@ export const roomReservationRouter = [
         meta : {header: 'HeaderComponent'}
     },
     {
-        path: '/reserve/room/success', // 객실 예약 완료 페이지 
+        path: '/reserve/room/success/:id', // 객실 예약 완료 페이지 
         name: 'RoomReservationSuccessComponent',
         component: RoomReservationSuccessComponent,
         meta : {header: 'HeaderComponent'}
