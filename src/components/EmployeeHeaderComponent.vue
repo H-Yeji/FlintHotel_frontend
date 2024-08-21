@@ -177,7 +177,7 @@ export default {
         case 'ChiDining':
           email = "flint_chi@gmail.com"
           break;
-        case 'JpaDining':
+        case 'JapDining':
           email = "flint_jap@gmail.com"
           break;
         case 'Lounge':

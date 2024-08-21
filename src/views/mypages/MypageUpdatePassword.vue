@@ -101,9 +101,9 @@ export default {
           },
           { headers }
         );
-        console.log("비밀번호가 성공적으로 업데이트되었습니다:", response.data);
+        alert("비밀번호가 성공적으로 업데이트되었습니다:", response.data);
       } catch (e) {
-        console(e);
+        alert(e);
       }
     },
     checkPassword() {
