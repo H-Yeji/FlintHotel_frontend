@@ -71,7 +71,7 @@ methods: {
       const response = await axios.post(this.findPasswordEndpoint, {
         email: this.email
       })
-      alert(response.data)
+      alert(response.data.status_message)
       this.closeModal()
     } catch (e) {
       console.log(this.email)

@@ -56,7 +56,7 @@
           <v-card>
             <v-card-title>서비스 접속 대기 중입니다.</v-card-title>
             <v-card-text>
-              <p>현재 대기 순서: {{ currentPosition }}번째 입니다.</p>
+              <p>현재 대기 순서: {{ currentPosition - 45 }}번째 입니다.</p>
             </v-card-text>
             <v-card-actions>
               <v-btn @click="handleDialogClose" style="color:#787878; font-family: 'Noto Serif KR', serif;">닫기</v-btn>
