@@ -54,9 +54,9 @@
                                 <div>성인 조식/50,000원</div>
                             </v-col>
                             <v-col cols="7" class="d-flex align-center" style="padding-left:20px;">
-                                <v-btn icon @click="decrementAdultBreakfast">-</v-btn>
+                                <v-btn icon @click="decrementAdultBreakfast()">-</v-btn>
                                 <span style="padding: 0 8px;">{{ adultBreakfastCount }}</span>
-                                <v-btn icon @click="incrementAdultBreakfast">+</v-btn>
+                                <v-btn icon @click="incrementAdultBreakfast()">+</v-btn>
                             </v-col>
                         </v-row>
                         <v-row>
@@ -64,9 +64,9 @@
                                 <div>어린이 조식/35,000원</div>
                             </v-col>
                             <v-col cols="7" class="d-flex align-center" style="padding-left:20px;">
-                                <v-btn icon @click="decrementChildBreakfast">-</v-btn>
+                                <v-btn icon @click="decrementChildBreakfast()">-</v-btn>
                                 <span style="padding: 0 8px;">{{ childBreakfastCount }}</span>
-                                <v-btn icon @click="incrementChildBreakfast">+</v-btn>
+                                <v-btn icon @click="incrementChildBreakfast()">+</v-btn>
                             </v-col>
                         </v-row>
                         <v-row>
@@ -251,8 +251,8 @@
                     adultCnt: adultCnt,
                     childCnt: childCnt,
                     roomId: roomId,
-                    adultBreakfastCount: this.adultBreakfastCount,
-                    childBreakfastCount: this.childBreakfastCount,
+                    adultBfCnt: this.adultBreakfastCount,
+                    childBfCnt: this.childBreakfastCount,
                     parkingYN: this.parkingYN,
                     requestContents: this.requestContents
                 };

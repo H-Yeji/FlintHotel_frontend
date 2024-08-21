@@ -93,17 +93,22 @@ export default {
         const token = localStorage.getItem("membertoken");
         // {headers: {Authorization: 'Bearer 토큰 값'}}}
         const headers = { Authorization: `Bearer ${token}` };
-        const response = await axios.put(
+        if(this.afterPassword === this.passwordCheck){
+          const response = await axios.put(
           `${process.env.VUE_APP_API_BASE_URL}/member/modify`,
           {
             beforePassword: this.beforePassword,
             afterPassword: this.afterPassword,
           },
           { headers }
-        );
-        alert("비밀번호가 성공적으로 업데이트되었습니다:", response.data);
+          );
+          alert("비밀번호가 성공적으로 업데이트되었습니다:", response.data);
+        }
+        else{
+          alert("비밀번호가 일치하지 않습니다.")
+        }
       } catch (e) {
-        alert(e);
+        alert(e.response.data.error_message);
       }
     },
     checkPassword() {
