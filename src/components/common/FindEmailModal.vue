@@ -69,6 +69,8 @@ methods: {
   async findEmail() {
     try {
       const response = await axios.post(this.findEmailEndpoint, {
+          firstName: this.firstName,
+          lastName: this.lastName,
           phoneNumber: this.phoneNumber,
       })
       alert(response.data?.result)
