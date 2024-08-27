@@ -167,7 +167,7 @@
               <v-row class="justify-end">
                 <v-btn
                   class="leftbtn"
-                  style="background-color: #787878; color: white"
+                  style="background-color: #787878; color: white; margin-right:10px;"
                   @click="changePassword"
                   >Change</v-btn
                 >
@@ -263,10 +263,10 @@
     transform: translate(-50%, -50%);
     border-radius: 10px;
     overflow-y: auto;
+    overflow-x: auto;
     flex-direction: column;
     padding-left: 40px;
     padding-right: 40px;
-    overflow: hidden;
   }
   
   .custom-title {
