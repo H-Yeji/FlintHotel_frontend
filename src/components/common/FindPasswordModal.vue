@@ -69,6 +69,8 @@ methods: {
   async findPassword() {
     try {
       const response = await axios.post(this.findPasswordEndpoint, {
+        firstName: this.firstName,
+        lastName: this.lastName,
         email: this.email
       })
       alert(response.data.status_message)
