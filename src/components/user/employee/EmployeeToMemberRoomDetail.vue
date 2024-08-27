@@ -114,7 +114,8 @@
             <!-- 모달 -->
             <v-dialog v-model="dialog" max-width="400px">
                 <v-card class="modal">
-                    <v-card-title>정말 삭제하시겠습니까?</v-card-title>
+                    <v-card-title>해당 예약을 정말 삭제하시겠습니까?</v-card-title>
+                    <br>
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn class="leftbtn" color="black" @click="deleteReservation">Yes</v-btn>
@@ -193,6 +194,7 @@ export default {
                 console.log(e);
             } finally {
                 this.dialog = false; // 모달 닫기 
+                alert("예약 내역이 삭제되었습니다.");
             }
         },
         cancelDelete() {
