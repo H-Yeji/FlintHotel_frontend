@@ -75,8 +75,18 @@
                             </v-col>
                             <v-col cols="6" class="d-flex align-center">
                                 <v-radio-group v-model="parkingYN" row>
-                                    <v-radio label="예" value="Y"></v-radio>
-                                    <v-radio label="아니오" value="N"></v-radio>
+                                    <v-radio label="예" value="Y">
+                                        <template v-slot:label>
+                                            <span>예</span>
+                                            <span v-if="parkingYN === 'Y'" class="selected">✔</span>
+                                        </template>
+                                    </v-radio>
+                                    <v-radio label="아니오" value="N">
+                                        <template v-slot:label>
+                                            <span>아니오</span>
+                                            <span v-if="parkingYN === 'N'" class="selected">✔</span>
+                                        </template>
+                                    </v-radio>
                                 </v-radio-group>
                             </v-col>
                         </v-row>
@@ -364,6 +374,11 @@
     .v-col {
         margin-left: 0px; 
         padding-left: 0px; 
+    }
+    .selected {
+        color: green;
+        margin-left: 5px;
+        font-weight: bold;
     }
 
 </style>
