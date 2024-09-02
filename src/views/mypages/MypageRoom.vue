@@ -12,37 +12,27 @@
               <v-col>
                 <v-card>
                   <v-card-text>
-                    <v-data-table>
-                      <thead>
+                    <v-data-table
+                      :items="roomList"
+                      :headers="tableHeaders"
+                      class="elevation-1">
+                      <template v-slot:item="{ item }">
                         <tr>
-                          <th style="text-align: center;">Reservation Number</th>
-                          <th style="text-align: center;">Hotel</th>
-                          <th style="text-align: center;">Room</th>
-                          <th style="text-align: center;">Check-in<br />Check-out</th>
-                          <th style="text-align: center;">Reservation Status</th>
-                          <th style="text-align: center;">Detail</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="room in roomList" :key="room.no">
-                          <td style="text-align: center;">{{ room.no }}</td>
-                          <td style="text-align: center;">Seoul</td>
-                          <td style="text-align: center;">{{ room.roomType }}</td>
                           <td style="text-align: center;">
-                            {{ room.checkInDate }}/<br />
-                            {{ room.checkOutDate }}
+                            <router-link :to="{ name: 'MypageRoomDetail', params: {id: item.id}}">
+                              {{ item.no }}
+                            </router-link>
                           </td>
+                          <td style="text-align: center;">{{ item.roomType }}</td>
+                          <td style="text-align: center;">{{ formatDate(item.checkInDate) }}</td>
+                          <td style="text-align: center;">{{ formatDate(item.checkOutDate) }}</td>
                           <td style="text-align: center;">
                             {{
-                              reserveState(room.checkInDate, room.checkOutDate)
+                              reserveState(item.checkInDate, item.checkOutDate)
                             }}
                           </td>
-                          <td style="text-align: center; ">
-                            <v-btn style="color:#69586F; border: 0.5px solid #69586F;"
-                                @click="$router.push(`/mypage/room/detail/${room.id}`)">Detail</v-btn>
-                          </td>
                         </tr>
-                      </tbody>
+                      </template>
                     </v-data-table>
                   </v-card-text>
                 </v-card>
@@ -64,12 +54,20 @@ export default {
   data() {
     return {
       roomList: [],
+      tableHeaders: [
+          {title:'Reservation No', key:'no', align:'center'},
+          {title:'Room', key:'roomType', align:'center'},
+          {title:'Check-in', key:'checkInDate', align:'center'},
+          {title: 'Check-out', key: 'checkOutDate', align: 'center'},
+          {title:'Status', align:'center'}
+      ],
     };
   },
   async created() {
     try {
+      console.log("들어옴");
       // url 만 바꾸는 코드.. 근대 이게 맞나? 싶긴하다.
-      history.pushState(null, null, "/mypage/room");
+      // history.pushState(null, null, "/mypage/room");
       const token = localStorage.getItem("membertoken");
       // {headers: {Authorization: 'Beare r 토큰 값'}}}
       const headers = { Authorization: `Bearer ${token}` };
@@ -77,23 +75,35 @@ export default {
         `${process.env.VUE_APP_API_BASE_URL}/reserve/room/list`,
         { headers }
       );
-      this.roomList = response.data.content;
-      console.log(this.roomList)
+      console.log("리스트: ", response.data);
+
+      this.roomList = response.data;
+      console.log("룸리스트: " , this.roomList)
     } catch (e) {
       console.log(e);
     }
   },
   methods: {
+    formatDate(dateString) {
+        if (!dateString) return '';
+
+        const [datePart, timePart] = dateString.split('T');
+        if (timePart) {
+            return `${datePart} ${timePart}`;
+        } else {
+            return datePart; // 시간 부분이 없는 경우 날짜만 반환
+        }
+    },
     reserveState(checkIn, checkOut) {
       const checkInDate = new Date(checkIn);
       const checkOutDate = new Date(checkOut);
       const today = new Date();
       if (checkInDate > today) {
-        return "Y";
+        return "예정";
       } else if (checkInDate < today && checkOutDate > today) {
         return "X";
       } else if (checkOutDate < today) {
-        return "N";
+        return "완료";
       }
     },
   },
