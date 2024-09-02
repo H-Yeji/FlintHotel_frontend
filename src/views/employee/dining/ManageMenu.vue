@@ -10,11 +10,11 @@
                             <v-row class="searchrow d-flex justify-space-between">
                                 <!-- 메뉴 추가 버튼: 왼쪽 정렬 -->
                                 <v-col cols="12" md="3" v-if="canAccess" class="d-flex justify-start" style="margin-top:7px; margin-left:-30px;">
-                                    <v-btn @click="openCreateMenuDialog()" color="#7A6C5B" elevation="0" outlined>Add Menu</v-btn>
+                                    <v-btn @click="openCreateMenuDialog" color="#7A6C5B" elevation="0" outlined>Add Menu</v-btn>
                                 </v-col>
                                 <!-- 검색 관련 요소: 오른쪽 정렬 -->
                                 <v-col cols="12" md="9" class="justify-end">
-                                    <v-form @submit.prevent="searchMenus" class="d-flex justfiy-end formCustom">
+                                    <v-form @submit.prevent="applySearch" class="d-flex justfiy-end formCustom">
                                         <v-col cols="auto" class="modSearch">
                                             <v-select
                                                 v-model="searchType"
@@ -45,7 +45,12 @@
                             <br>
                             <v-row class="justify-center">
                                 <v-col cols="12">
-                                    <v-data-table>
+                                    <v-data-table
+                                        :items="menuList"
+                                        :items-per-page="itemsPerPage"
+                                        :server-items-length="totalItems"
+                                        hide-default-footer
+                                    >
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center; padding-left:50px;">Id</th>
@@ -57,10 +62,9 @@
                                         </thead>
                                         <tbody>
                                             <tr class="text-center" v-for="p in menuList" :key="p.menuId">
-                                                <td class="id-column-value" style="padding-left:50px;" >{{ p.menuId }}</td>
+                                                <td class="id-column-value" style="padding-left:50px;">{{ p.menuId }}</td>
                                                 <td class="name-column-value" style="padding-left:50px;">{{ p.menuName }}</td>
                                                 <td class="price-column-value" style="padding-left:50px;">{{ p.cost }}원</td>
-
                                                 <td class="col-action">
                                                     <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B;" 
                                                     @click="openEditMenuDialog(p)" elevation="0" outlined small>Modify</v-btn>
@@ -70,6 +74,25 @@
                                             </tr>
                                         </tbody>
                                     </v-data-table>
+                                    <!-- 페이지 넘김 버튼: 중앙 정렬 -->
+                                    <v-row class="justify-center pagination-buttons" style="margin-top: 20px;">
+                                        <v-btn
+                                            :disabled="currentPage === 1"
+                                            @click="previousPage"
+                                            color="primary"
+                                            outlined
+                                        >
+                                            이전 페이지
+                                        </v-btn>
+                                        <v-btn
+                                            :disabled="currentPage === totalPages"
+                                            @click="nextPage"
+                                            color="primary"
+                                            outlined
+                                        >
+                                            다음 페이지
+                                        </v-btn>
+                                    </v-row>
                                 </v-col>
                             </v-row>
                         </v-card-text>
@@ -104,7 +127,7 @@
 </template>
 
 <script>
-import EmployeeView from '@/views/EmployeeView.vue';
+import EmployeeView from '@/views/EmployeeView.vue'
 import axios from '@/axios'
 import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'vue-router'
@@ -117,7 +140,7 @@ export default {
         EmployeeView,
         AddMenuModal,
         ModMenuModal,
-        DeleteModal,
+        DeleteModal
     },
     data() {
         return {
@@ -125,7 +148,7 @@ export default {
                 'KorDining': 1,
                 'ChiDining': 2,
                 'JapDining': 3,
-                'Lounge': 4,
+                'Lounge': 4
             },
             department: "",
             searchType: "",
@@ -133,12 +156,17 @@ export default {
             searchOptions: [
                 { text: '선택', value: '' },
                 { text: '메뉴 코드', value: 'menuId' },
-                { text: '메뉴명', value: 'menuName' },
+                { text: '메뉴명', value: 'menuName' }
             ],
             menuList: [],
             canAccess: false,
             pageTitle: '메뉴 목록',
             router: useRouter(),
+
+            currentPage: 1,
+            itemsPerPage: 10,
+            totalItems: 0,
+            totalPages: 0,
 
             createDialog: false,
             createMenuData: {},
@@ -148,7 +176,7 @@ export default {
 
             deleteDialog: false,
             menuIdToDelete: null
-        };
+        }
     },
     mounted() {
         this.initialize()
@@ -163,14 +191,7 @@ export default {
                 this.canAccess = ['KorDining', 'JapDining', 'ChiDining', 'Lounge'].includes(this.department)
 
                 if (this.canAccess) {
-                    try {
-                        const response = await axios.get(`/employee/dining/list`, {
-                            params: { department: this.department }
-                        })
-                        this.menuList = response.data.result
-                    } catch (error) {
-                        console.error('Error fetching menu list:', error)
-                    }
+                    this.fetchMenus() // 페이지 데이터를 가져옴
                 } else {
                     alert("접근 권한이 없습니다.")
                     this.router.push('/employee/')
@@ -180,25 +201,45 @@ export default {
                 this.router.push('/employee/login')
             }
         },
-        async searchMenus() {
+        async fetchMenus() {
             try {
                 const response = await axios.get(`/employee/dining/list`, {
                     params: {
                         department: this.department,
                         searchType: this.searchType,
                         searchValue: this.searchValue,
+                        page: this.currentPage - 1, // 서버는 0 기반 페이지 인덱스를 사용
+                        size: this.itemsPerPage
                     }
-                });
-                this.menuList = response.data.result;
+                })
+                this.menuList = response.data.result.content
+                this.totalItems = response.data.result.totalElements
+                this.totalPages = response.data.result.totalPages
             } catch (error) {
-                console.error('Error searching products:', error);
+                console.error('Error fetching menu list:', error)
+            }
+        },
+        applySearch() {
+            this.currentPage = 1
+            this.fetchMenus() // 검색 조건이 적용된 상태에서 데이터 가져오기
+        },
+        previousPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--
+                this.fetchMenus()
+            }
+        },
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++
+                this.fetchMenus()
             }
         },
         openCreateMenuDialog() {
             this.createMenuData = {
                 menuName: '',
                 cost: 0,
-                diningId: this.diningMapping[this.department] || null, // department를 diningId로 변환
+                diningId: this.diningMapping[this.department] || null
             }
             this.createDialog = true
         },
@@ -249,7 +290,7 @@ export default {
             }
         }
     }
-};
+}
 </script>
 
 <style scoped>
@@ -352,7 +393,6 @@ export default {
     display: flex;
     justify-content: space-between;
     gap: -10px;
-    /* 버튼 사이의 간격 */
     border-bottom: 1px solid #e0e0e0;
     height: 100%;
     padding-top: 40px;
