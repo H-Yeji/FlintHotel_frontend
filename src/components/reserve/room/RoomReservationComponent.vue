@@ -16,7 +16,16 @@
               <!-- check in -->
               <v-col cols="12" md="2">
                 <div class="date-label">Check In</div> 
-                <v-menu v-model="menuCheckIn">
+                <v-menu
+                  v-model="menuCheckIn"
+                  :close-on-content-click="false"
+                  :nudge-left="80" 
+                  :nudge-bottom="20" 
+                  transition="scale-transition"
+                  offset-y
+                  attach
+                  min-width="auto"
+                >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
                       v-bind="attrs"
@@ -24,18 +33,28 @@
                       :value="formattedCheckInDate"
                       readonly
                       @click="menuCheckIn = true"
+                      placeholder="Select date"
                     ></v-text-field>
                   </template>
                   <v-date-picker
                     v-model="checkInDate"
-                    @input="closeCheckInMenu"
+                    @click="closeCheckInMenu"
                   ></v-date-picker>
                 </v-menu>
               </v-col>
               <!-- check out -->
               <v-col cols="12" md="2">
                 <div class="date-label">Check Out</div> 
-                <v-menu v-model="menuCheckOut">
+                <v-menu
+                  v-model="menuCheckOut"
+                  :close-on-content-click="false"
+                  :nudge-left="80" 
+                  :nudge-bottom="20" 
+                  transition="scale-transition"
+                  offset-y
+                  attach
+                  min-width="auto"
+                >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
                       v-bind="attrs"
@@ -43,11 +62,12 @@
                       :value="formattedCheckOutDate"
                       readonly
                       @click="menuCheckOut = true" 
+                      placeholder="Select date"
                     ></v-text-field>
                   </template>
                   <v-date-picker
                     v-model="checkOutDate"
-                    @input="closeCheckOutMenu"
+                    @click="closeCheckOutMenu"
                   ></v-date-picker>
                 </v-menu>
               </v-col>
@@ -61,7 +81,7 @@
                   <v-text-field type="number" outlined class="mx-2" v-model="numChildren" min="1" ></v-text-field>
               </v-col>
               <v-col cols="12" md="2" class="d-flex align-center justify-center">
-                <v-btn class="custom-search-btn mx-2" style="height: 50px; width: 70%;" @click="searchRooms">Search</v-btn>
+                <v-btn class="custom-search-btn mx-2" style="height: 50px; width: 70%; background-color: #7A6C5B; color: white;" @click="searchRooms">Search</v-btn>
               </v-col>
             </v-row>
           </v-card-text>
@@ -104,7 +124,7 @@
 </div>
 </template>
   
-  <script>
+  <script scoped>
   import FlintView from '@/views/FlintView.vue';
   import dayjs from 'dayjs';
   import axios from '@/axios';
@@ -193,7 +213,7 @@
   };
   </script>
   
-<style scoped>
+<style>
   html,
   body,
   #app,
@@ -247,6 +267,9 @@
 
   .v-card-text {
     padding: 0 8px; /* Reduced padding */
+  }
+  .v-card {
+    overflow: visible !important;
   }
   .selectCard {
     font-family: "Noto Serif KR", serif;
