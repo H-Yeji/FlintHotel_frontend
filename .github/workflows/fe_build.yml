@@ -1,0 +1,47 @@
+name: deploy to aws s3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: source code checkout
+        uses: actions/checkout@v2
+      
+      - name: setup node.js
+        uses: actions/setup-node@v2
+        with: 
+          node-version: '20'
+      
+      - name: npm install
+        working-directory: . 
+          # run은 직접 사용하고자 하는 명령어.
+        run: npm install
+          
+      - name: npm build
+        working-directory: .
+        run: npm run build
+      
+      - name: setup aws cli
+        uses: aws-actions/configure-aws-credentials@v2
+        with: 
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET}}
+          aws-region: "ap-northeast-2"
+      
+      - name: clear s3 bucket
+      # --recursive 파일안의 파일안의 파일안의 지우겠다 -> 모든 파일을 지우겠다.
+        run: aws s3 rm s3://www.flinthotels.site/ --recursive
+      - name: deploy to s3
+      # --recursive rm -> cp 복사해주겠다
+        run: aws s3 cp ./dist s3://www.flinthotels.site/ --recursive
+
+      # 캐시 지워주는 무효화 작업
+      - name: invalidate cloudfront cache
+      # id 는 cloudfront 의 이름
+        run: aws cloudfront create-invalidation --distribution-id E3KK7WSX01NH8P --paths "/*"
