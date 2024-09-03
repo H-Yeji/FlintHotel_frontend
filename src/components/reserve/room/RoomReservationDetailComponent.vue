@@ -268,7 +268,13 @@
                 localStorage.removeItem('numAdults');
                 localStorage.removeItem('numChildren');
                 localStorage.removeItem('selectedRoom');
-                this.$router.push(`/reserve/room/success/` + response.data.result.id);
+
+                setTimeout(() => {
+                    alert("예약이 완료되었습니다.");
+                    this.$router.push(`/reserve/room/success/` + response.data.result.id);
+                }, 100);
+
+                // this.$router.push(`/reserve/room/success/` + response.data.result.id);
             } catch(e) {
                 if (e.response) {
                     console.error("Error Status:", e.response.status);  
@@ -304,6 +310,7 @@
       transform: translate(-50%, -50%);
       border-radius: 10px;
       overflow-y: auto;
+      overflow-x: auto;
       flex-direction: column;
       padding-left:40px;
       padding-right:40px;
@@ -322,6 +329,7 @@
         background-color: #F4F4F4;
     }
     .innerContainer {
+        min-width: 1100px;
         font-family: "Noto Serif KR", serif;
         border-top: 3px solid #928E8E; /* 테두리 두께와 색상 설정 */
     }

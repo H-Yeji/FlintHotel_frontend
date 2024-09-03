@@ -129,6 +129,7 @@ export default {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     overflow-y: auto;
+    overflow-x: auto;
     flex-direction: column;
     padding-left: 40px;
     padding-right: 40px;

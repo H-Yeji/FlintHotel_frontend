@@ -1,23 +1,24 @@
 <template>
   <!-- 네비게이션바 -->
-  <v-app-bar app dark>
+  <v-app-bar app dark dense>
     <v-container>
-      <!-- 행의 자식 요소들을 모두 중앙정렬  -->
-      <v-row align="center">
-        <!-- 콜 전체를 왼쪽정 렬되게 해줌 -->
-        <v-col class="d-flex justify-start">
-          <v-btn @click="openDiningReservationModal()">Dining({{ newDiningReservationCount }})</v-btn>
-          <v-btn @click="openRoomReservationModal()">Room({{ newReservationCount }})</v-btn>
-          <v-btn @click="openMemberDialog">Member</v-btn>
-          <v-btn v-if="department === 'Office'" :to="{ path: `/employee/${dept}` }"> {{ manage }}</v-btn>
-          <v-btn v-else @click="openManageDialog"> {{ manage }}</v-btn>
-        </v-col>
-        <v-col class="d-flex justify-end">
-          <v-btn class="flint-hotel-title" :to="{ path: '/employee' }">HOME</v-btn>
-          <v-btn v-if="!isLogin" :to="{ path: '/employee/login' }"> Login </v-btn>
-          <v-btn v-else-if="isLogin" @click="Logout()"> Logout </v-btn>
-        </v-col>
-      </v-row>
+      <!-- 행의 자식 요소들을 중앙정렬  -->
+      <v-row align="center" no-gutters class="flex-nowrap justify-space-between">
+      <!-- 좌측 버튼들 -->
+      <v-col class="d-flex justify-start" cols="auto">
+        <v-btn @click="openDiningReservationModal()" class="mx-2">Dining({{ newDiningReservationCount }})</v-btn>
+        <v-btn @click="openRoomReservationModal()" class="mx-2">Room({{ newReservationCount }})</v-btn>
+        <v-btn @click="openMemberDialog" class="mx-2">Member</v-btn>
+        <v-btn v-if="department === 'Office'" :to="{ path: `/employee/${dept}` }" class="mx-2">{{ manage }}</v-btn>
+        <v-btn v-else @click="openManageDialog" class="mx-2">{{ manage }}</v-btn>
+      </v-col>
+      <!-- 우측 버튼들 -->
+      <v-col class="d-flex justify-end" cols="auto">
+        <v-btn class="flint-hotel-title" :to="{ path: '/employee' }">HOME</v-btn>
+        <v-btn v-if="!isLogin" :to="{ path: '/employee/login' }" class="mx-2">Login</v-btn>
+        <v-btn v-else-if="isLogin" @click="Logout()" class="mx-2">Logout</v-btn>
+      </v-col>
+    </v-row>
 
       <!-- member 클릭 > 모달창 -->
       <v-dialog v-model="dialogMember" max-width="400px">
@@ -331,7 +332,20 @@ export default {
 }
 
 .v-btn {
-  margin: 0 30px;
+  margin: 0 10px;
   font-family: "Noto Serif KR", serif;
+}
+/* 추가된 스타일 */@media (max-width: 768px) {
+  .v-btn {
+    font-size: 12px; /* 작은 화면에서는 폰트 크기를 줄임 */
+    margin: 0 5px; /* 작은 화면에서는 마진을 줄임 */
+    padding: 0 8px; /* 작은 화면에서는 패딩을 줄임 */
+  }
+  .flint-hotel-title {
+    font-size: 18px; /* 작은 화면에서는 타이틀의 크기를 줄임 */
+  }
+  .v-app-bar {
+    padding: 0 10px; /* 작은 화면에서는 네비게이션 바의 패딩을 줄임 */
+  }
 }
 </style>

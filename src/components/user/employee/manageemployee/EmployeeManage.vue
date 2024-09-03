@@ -101,7 +101,7 @@
             <!-- 모달 -->
             <v-dialog v-model="showConfirmDialog" max-width="400px" class="modal">
                 <v-card class="modal">
-                    <v-card-title>정말 삭제하시겠습니까?</v-card-title>
+                    <!-- <v-card-title>정말 삭제하시겠습니까?</v-card-title> -->
                     <v-card-text>{{ modalMessage }}</v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -169,7 +169,8 @@ export default {
             console.log(this.modData)
             try{
                 const response = await axios.put(`/employee/mod_rank`, this.modData)
-                alert(response.data.status_message)
+                console.log(response.data.status_message);
+                alert("해당 직원의 직급이 변경되었습니다.");
                 window.location.reload()
             } catch(e){
                 console.log(e)
@@ -184,7 +185,7 @@ export default {
                 const response = await axios.patch(`/employee/delaccount`, { employeeId: this.targetId })
                 if (response.status === 200) {
                     console.log(response.data)
-                    alert(response.data.status_message)
+                    alert("해당 직원의 퇴사처리가 완료되었습니다.");
                     return this.router.push('/employee/office')
                 }
             } catch (error) {
