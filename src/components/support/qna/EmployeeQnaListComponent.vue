@@ -17,8 +17,7 @@
                                             <v-text-field class="tf" v-model="email"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="3" class="search">
-                                            <v-btn @click="searchMember()" style="color: white;"
-                                                color="#7A6C5B">Search</v-btn>
+                                            <v-btn @click="searchMember" style="color: white;" color="#7A6C5B">Search</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-col>
@@ -26,23 +25,45 @@
                             <br>
                             <v-row class="justify-center">
                                 <v-col cols="12">
-                                    <v-data-table class="elevation-1" :header="headers" :items="qnaList" item-key="id">
-
-                                        <template v-slot:header>
-                                        </template>
+                                    <v-data-table 
+                                        class="elevation-1" 
+                                        :headers="headers" 
+                                        :items="qnaList" 
+                                        item-key="id"
+                                        :items-per-page="pageSize"
+                                        hide-default-footer>
+                                        <!-- 데이터 테이블의 본문 내용 -->
                                         <template v-slot:body="{ items }">
-                                                <tr v-for="q in items" :key="q.id" >
-                                                    <td>{{ q.id }}</td>
-                                                    <td>{{ q.title }}</td>
-                                                    <td>{{ q.memberEmail }}</td>
-                                                    <td>{{ formatDate(q.writeTime) }}</td>
-                                                    <td>
-                                                        <v-btn @click="diningDetail(q.id)"
-                                                        style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B;">Detail</v-btn>
-                                                    </td>
-                                                </tr>
+                                            <tr v-for="q in items" :key="q.id">
+                                                <td>{{ q.id }}</td>
+                                                <td>{{ q.title }}</td>
+                                                <td>{{ q.memberEmail }}</td>
+                                                <td>{{ formatDate(q.writeTime) }}</td>
+                                                <td>
+                                                    <v-btn @click="diningDetail(q.id)"
+                                                        style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B;">
+                                                        Detail
+                                                    </v-btn>
+                                                </td>
+                                            </tr>
                                         </template>
                                     </v-data-table>
+                                    <v-row class="pagination-buttons justify-center">
+                                        <v-btn
+                                            :disabled="currentPage === 1"
+                                            @click="previousPage"
+                                            color="#7A6C5B"
+                                            outlined>
+                                            이전 페이지
+                                        </v-btn>
+                                        <v-btn
+                                            :disabled="currentPage >= totalPages"
+                                            @click="nextPage"
+                                            color="#7A6C5B"
+                                            outlined>
+                                            다음 페이지
+                                        </v-btn>
+                                    </v-row>
                                 </v-col>
                             </v-row>
                         </v-card-text>
@@ -64,94 +85,86 @@ export default {
     data() {
         return {
             email: "",
-            qnaList: [],
+            qnaList: [], // QnA 목록
             headers: [
                 { text: 'Id', value: 'id' },
                 { text: 'Title', value: 'title' },
-                { text: 'Email', value: 'MemberEmail' },
+                { text: 'Email', value: 'memberEmail' },
                 { text: 'Write Time', value: 'writeTime' },
                 { text: 'Detail', value: 'detail' }
             ],
-            pageSize: 10,
-            currentPage: 0,
-            isLoading: false,
-            isLastPage: false
+            pageSize: 10, // 페이지당 항목 수
+            currentPage: 1, // 현재 페이지 번호
+            totalPages: 0, // 전체 페이지 수
+            isLoading: false, // 데이터 로딩 중 여부
         };
     },
     methods: {
         async searchMember() {
-            this.qnaList = [];
-            this.currentPage = 0;
-            this.isLastPage = false;
-
-            try {
-                const params = {
-                    size: this.pageSize,
-                    page: this.currentPage
-                };
-
-                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/list`, { params });
-                this.qnaList = response.data.result.content.filter(qna => qna.memberEmail === this.email);
-
-                this.currentPage++;
-
-                if (this.qnaList.length === 0) {
-                    this.isLastPage = true;
-                }
-            } catch (e) {
-                console.error(e.message);
-            }
+            // 검색 실행 시 현재 페이지를 첫 페이지로 리셋
+            this.currentPage = 1;
+            this.loadQnA(); // 검색 조건을 포함하여 데이터 로딩
         },
         async diningDetail(id) {
+            // QnA 상세 페이지로 이동
             this.$router.push({
                 path: `/employee/qna/detail/${id}`
             });
         },
         async loadQnA() {
             try {
-                if (this.isLoading || this.isLastPage) return;
+                // 로딩 중 상태라면 중복 호출 방지
+                if (this.isLoading) return;
 
-                this.isLoading = true;
+                this.isLoading = true; // 로딩 상태 시작
 
                 const params = {
-                    size: this.pageSize,
-                    page: this.currentPage
+                    size: this.pageSize, // 페이지당 항목 수
+                    page: this.currentPage - 1, // 현재 페이지 (서버는 0부터 시작)
+                    email: this.email // 이메일 필터링 추가
                 };
 
                 const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/list`, { params });
-                const additionalData = response.data.result.content || [];
+                const responseData = response.data.result || {};
 
-                if (additionalData.length === 0) {
-                    this.isLastPage = true;
-                }
+                // QnA 데이터 및 전체 페이지 수 갱신
+                this.qnaList = responseData.content || [];
+                this.totalPages = responseData.totalPages || 0;
 
-                this.qnaList = [...this.qnaList, ...additionalData];
-                this.currentPage++;
-                this.isLoading = false;
+                this.isLoading = false; // 로딩 상태 종료
 
             } catch (e) {
                 console.error(e.message);
+                this.isLoading = false; // 오류 발생 시에도 로딩 상태 종료
             }
         },
         formatDate(dateString) {
             const date = new Date(dateString);
-        
-        // 날짜를 yyyy-mm-dd 형식으로 포맷팅
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
-        const day = String(date.getDate()).padStart(2, '0');
-        
-        return `${year}-${month}-${day}`;
-        
-      
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
         },
+        previousPage() {
+            // 이전 페이지로 이동
+            if (this.currentPage > 1) {
+                this.currentPage--;
+                this.loadQnA();
+            }
+        },
+        nextPage() {
+            // 다음 페이지로 이동
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+                this.loadQnA();
+            }
+        }
     },
     created() {
         this.loadQnA(); // 컴포넌트 생성 시 초기 데이터 로딩
     }
 };
 </script>
-
 
 <style scoped>
 .content-container {
@@ -241,5 +254,11 @@ export default {
 
 .emailcol {
     margin-right: -20px;
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 </style>

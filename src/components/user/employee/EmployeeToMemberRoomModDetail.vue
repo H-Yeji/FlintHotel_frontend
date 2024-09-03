@@ -100,12 +100,23 @@
                                 </v-col>
                             </v-row>
                             <v-row class="justify-end">
-                                <v-btn @click="modDetail()" style="color: white; background-color: #7A6C5B; margin-top: 20px;">Submit</v-btn>
+                                <v-btn  @click="openModiDialog" style="color: white; background-color: #7A6C5B; margin-top: 20px;">Submit</v-btn>
                             </v-row>
                         </v-card-text>
                     </v-card>
                 </v-col>
             </v-row>
+            <!-- 수정 모달 -->
+            <v-dialog v-model="modDialog" max-width="400px">
+                <v-card class="modal">
+                    <v-card-title>객실 예약 내역을 수정하시겠습니까?</v-card-title>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn class="leftbtn" color="black" @click="modDetail">Yes</v-btn>
+                        <v-btn color="black" @click="cancelModify">No</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         </v-container>
     </div>
 </template>
@@ -128,7 +139,8 @@ export default {
             adultBfCnt: "",
             childBfCnt: "",
             parkingYN: "",
-            requestContents: ""
+            requestContents: "",
+            modDialog: false
         };
     },
     created() {
@@ -164,6 +176,9 @@ export default {
             
             }
         },
+        openModiDialog() {
+            this.modDialog = true;
+        },
         async modDetail() {
             try {
                 const reserveId = this.$route.params.id;
@@ -181,7 +196,13 @@ export default {
                 const response = await axios.post(`/employee/room/modify/${reserveId}`, params);
                 console.log(response);
 
-                this.$router.push(`/employee/room/${reserveId}`);
+                setTimeout(() => {
+                    alert("객실 예약 내역이 수정되었습니다.");
+                    this.$router.push(`/employee/room/${reserveId}`);
+                }, 100);
+
+                this.modDialog = false;
+                // this.$router.push(`/employee/room/${reserveId}`);
             } catch(e) {
                 if (e.response) {
                     console.error("Error Status:", e.response.status);  
@@ -190,6 +211,9 @@ export default {
                     console.error("Error Message:", e.message);
                 }
             }
+        },
+        cancelModify() {
+            this.modDialog = false;
         }
     }
 };
@@ -270,5 +294,9 @@ export default {
 }
 .leftbtn {
     margin-right: 2px;
-  }
+}
+.modal {
+  padding: 20px;
+  font-family: "Noto Serif KR", serif;
+}
 </style>

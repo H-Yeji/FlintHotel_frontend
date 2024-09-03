@@ -2,9 +2,9 @@
     <div>
         <EmployeeView />
         <v-container class="content-container">
-            <v-card class="vCard" style="margin-top:20px;">
+            <v-card class="vCard" style="width: 1100px; height: auto">
                 <v-card-title class="vCardTitle">객실 가격 관리</v-card-title>
-                <v-card-text class="vCardText">
+                <v-card-text class="vCardText" style="margin-top:40px;">
                     <tbody>
                         <tr v-for="r in reversedRoomList" :key="r.id">
                             <td>{{ r.roomTypeName }}</td>
@@ -22,8 +22,7 @@
                     </tbody>
                     <br>
                     <v-btn class="vBtn" @click="toggleEditMode" 
-                    style="margin-left:-20px; color: white; background-color:#7A6C5B"
-                    block>
+                    style="color: white; background-color:#7A6C5B; margin-left:32%;">
                         {{ editMode ? 'Submit' : 'Modify' }}
                     </v-btn>
                 </v-card-text>
@@ -115,23 +114,35 @@ export default {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     overflow-y: auto;
+    overflow-x: auto;
     flex-direction: column;
     padding-left: 40px;
     padding-right: 40px;
-    padding-top: 3%;
 }
 .vCard {
+    padding: 20px;
+    border-radius: 8px;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
     font-family: "Noto Serif KR", serif;
-    margin: 0 auto; /* Center horizontally */
-    align-items: center; 
-    width: 50%;
+    height: 90%;
+    border: none;
+    box-shadow: none;
 }
 .vCardTitle {
-    text-align: center;
-    background-color: #DCC8B0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #787878;
+    text-align: left;
+    border-bottom: 3px solid #787878;
+    font-family: "Noto Serif KR", serif;
 }
 .vCardText {
     text-align: center;
-    padding-left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 </style>

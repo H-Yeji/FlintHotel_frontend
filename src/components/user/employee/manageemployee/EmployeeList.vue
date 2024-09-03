@@ -17,7 +17,7 @@
 
                                 <v-col cols="12" md="2" class="emailcol" style="margin-top:-7px;">
                                     <v-select v-model="searchType" :items="searchOptions" item-title="text"
-                                        item-value="value" dense hide-details class="d-flex justfiy-end formCustom">
+                                        item-value="value" dense hide-details class="d-flex justify-end formCustom">
                                     </v-select>
                                 </v-col>
                                 <v-col cols="12" md="4" class="emailcol">
@@ -26,17 +26,23 @@
                                     </v-text-field>
                                 </v-col>
                                 <v-col cols="12" md="2">
-                                    <v-btn @click="searchEmployees" style="background-color:#DCC8B0; color:white;"
+                                    <v-btn @click="applySearch" style="background-color:#DCC8B0; color:white;"
                                         elevation="0" outlined>Search</v-btn>
                                 </v-col>
                             </v-row>
                             <br>
                             <v-row class="justify-center">
                                 <v-col cols="12">
-                                    <v-data-table class="elevation-1">
+                                    <!-- 데이터 테이블 표시 -->
+                                    <v-data-table
+                                        class="elevation-1"
+                                        :items="filteredEmployees"
+                                        :items-per-page="itemsPerPage"
+                                        :server-items-length="totalItems"
+                                        hide-default-footer
+                                    >
                                         <thead>
                                             <tr>
-                                                <!-- <th style="text-align: center;">Id</th> -->
                                                 <th style="text-align: center;">Employee Number</th>
                                                 <th style="text-align: center;">Email</th>
                                                 <th style="text-align: center;">Name</th>
@@ -54,22 +60,40 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="text-center" v-for="employee in filteredDepartment"
-                                                :key="employee.id">
-                                                <!-- <td>{{ employee.id }}</td> -->
-                                                <td>{{ employee.employeeNumber }}</td>
-                                                <td>{{ employee.email }}</td>
-                                                <td>{{ employee.firstName + " " + employee.lastName }}</td>
-                                                <td>{{ employee.department }}</td>
+                                            <tr class="text-center" v-for="emp in filteredEmployees"
+                                                :key="emp.id">
+                                                <td>{{ emp.employeeNumber }}</td>
+                                                <td>{{ emp.email }}</td>
+                                                <td>{{ emp.firstName + " " + emp.lastName }}</td>
+                                                <td>{{ emp.department }}</td>
                                                 <td>
                                                     <v-btn
                                                         style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; margin-top:4px;"
-                                                        :to="{ path: './office/manage', query: { id: employee.id } }">Detail
+                                                        :to="{ path: './office/manage', query: { id: emp.id } }">Detail
                                                     </v-btn>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </v-data-table>
+                                    <!-- 페이지 넘김 버튼 -->
+                                    <div class="pagination-buttons">
+                                        <v-btn
+                                            :disabled="currentPage === 1"
+                                            @click="previousPage"
+                                            color="primary"
+                                            outlined
+                                        >
+                                            이전 페이지
+                                        </v-btn>
+                                        <v-btn
+                                            :disabled="currentPage === totalPages"
+                                            @click="nextPage"
+                                            color="primary"
+                                            outlined
+                                        >
+                                            다음 페이지
+                                        </v-btn>
+                                    </div>
                                 </v-col>
                             </v-row>
                         </v-card-text>
@@ -81,6 +105,7 @@
 </template>
 
 <script>
+import { ref, computed, onMounted } from 'vue'
 import EmployeeView from '@/views/EmployeeView.vue'
 import axios from '@/axios'
 import { useRouter } from 'vue-router'
@@ -89,74 +114,118 @@ export default {
     components: {
         EmployeeView
     },
-    data() {
-        return {
-            employee: [],
-            filteredEmployees: [],  // 필터링된 결과를 저장
-            searchType: '',
-            searchValue: '',
-            searchOptions: [
-                { text: '선택', value: '' },
-                { text: '직원 번호', value: 'employeeNumber' },
-                { text: '부서', value: 'department' },
-                { text: '이메일', value: 'email' },
-            ],
-            selectedEmployee: null,
-            modalMessage: '',
-            router: useRouter(),
-            departments: [
-                { id: 1, name: 'Office' },
-                { id: 2, name: 'KorDining' },
-                { id: 3, name: 'ChiDining' },
-                { id: 4, name: 'JapDining' },
-                { id: 5, name: 'Lounge' },
-                { id: 6, name: 'Room' },
-            ],
-            selectedDepartment: "",
-        }
-    },
-    computed: {
-        filteredDepartment() {
-            console.log(this.selectedDepartment)
-            if (!this.selectedDepartment) {
-                return this.filteredEmployees
-            }
-            return this.filteredEmployees.filter(employee => employee.department === this.selectedDepartment);
-        },
-    },
-    async created() {
-        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/list`);
-        this.employeeList = response.data.result
-        console.log(this.employeeList)
-        this.fetchEmployees()
-    },
-    methods: {
-        async fetchEmployees() {
-            const response = await axios.get(`/employee/list`)
-            this.employee = response.data.result
-            this.filteredEmployees = this.employee.filter(emp => emp.delYN === 'N')
-        },
-        searchEmployees() {
-            if (!this.searchType || !this.searchValue) {
-                this.filteredEmployees = this.employee.filter(emp => emp.delYN === 'N')
-                return
+    setup() {
+        const employee = ref([])
+        const searchType = ref('')
+        const searchValue = ref('')
+        const searchOptions = [
+            { text: '선택', value: '' },
+            { text: '직원 번호', value: 'employeeNumber' },
+            { text: '부서', value: 'department' },
+            { text: '이메일', value: 'email' },
+        ]
+        const selectedDepartment = ref('')
+        const currentPage = ref(1)
+        const itemsPerPage = ref(10)
+        const totalItems = ref(0)
+        const totalPages = ref(0)
+        const router = useRouter()
+        const isSearchActivated = ref(false) // 검색 버튼이 눌렸는지 여부
+
+        // 검색을 위해 적용된 조건을 별도로 저장
+        const activeSearchType = ref('')
+        const activeSearchValue = ref('')
+        const activeDepartment = ref('')
+
+        const filteredEmployees = computed(() => {
+            let result = employee.value
+
+            if (isSearchActivated.value && activeSearchType.value && activeSearchValue.value) {
+                result = result.filter(emp => {
+                    const field = emp[activeSearchType.value] ? emp[activeSearchType.value].toString().toLowerCase() : ''
+                    return field.includes(activeSearchValue.value.toLowerCase())
+                })
             }
 
-            this.filteredEmployees = this.employee.filter((emp) => {
-                const field = emp[this.searchType] ? emp[this.searchType].toString().toLowerCase() : ''
-                return emp.delYN === 'N' && field.includes(this.searchValue.toLowerCase())
-            });
-        },
-        onDepartmentChange(event) {
-            this.selectedDepartment = event.target.value;
-        },
-        employeeId() {
-            // $route.query를 통해 쿼리 파라미터에 접근
-            console.log(this.$router.query.id);
-            return this.$route.query.id;
-        },
-        createEmployee() {
-            this.router.push('/employee/create')
+            if (isSearchActivated.value && activeDepartment.value) {
+                result = result.filter(emp => emp.department === activeDepartment.value)
+            }
+
+            return result
+        })
+
+        const fetchEmployees = async () => {
+            try {
+                const response = await axios.get(`/employee/list`, {
+                    params: {
+                        page: currentPage.value - 1,
+                        size: itemsPerPage.value
+                    }
+                })
+                employee.value = response.data.result.content
+                totalItems.value = response.data.result.totalElements
+                totalPages.value = Math.ceil(totalItems.value / itemsPerPage.value)
+                console.log("Fetched employees:", employee.value)
+                console.log("Total items:", totalItems.value)
+            } catch (error) {
+                console.error('Error fetching employees:', error)
+            }
+        }
+
+        const applySearch = () => {
+            // 검색 버튼이 눌렸을 때만 검색 조건을 업데이트
+            isSearchActivated.value = true
+            activeSearchType.value = searchType.value
+            activeSearchValue.value = searchValue.value
+            activeDepartment.value = selectedDepartment.value
+            currentPage.value = 1
+            fetchEmployees()
+        }
+
+        const previousPage = () => {
+            if (currentPage.value > 1) {
+                currentPage.value--
+                fetchEmployees()
+            }
+        }
+
+        const nextPage = () => {
+            if (currentPage.value < totalPages.value) {
+                currentPage.value++
+                fetchEmployees()
+            }
+        }
+
+        const onDepartmentChange = (event) => {
+            selectedDepartment.value = event.target.value
+        }
+
+        const createEmployee = () => {
+            router.push('/employee/create')
+        }
+
+        onMounted(() => {
+            fetchEmployees() // 초기 로딩 시 1페이지의 데이터를 가져옴
+        })
+
+        return {
+            employee,
+            searchType,
+            searchValue,
+            searchOptions,
+            selectedDepartment,
+            currentPage,
+            itemsPerPage,
+            totalItems,
+            totalPages,
+            filteredEmployees,
+            fetchEmployees,
+            applySearch,
+            previousPage,
+            nextPage,
+            onDepartmentChange,
+            createEmployee,
+            isSearchActivated
         }
     }
 }
@@ -261,17 +330,10 @@ export default {
     margin: 0;
 }
 
-.data-label {
-    font-size: 14px;
-    font-weight: bold;
-    color: #787878;
+.pagination-buttons {
     display: flex;
-    justify-content: space-between;
-    gap: -10px;
-    /* 버튼 사이의 간격 */
-    border-bottom: 1px solid #e0e0e0;
-    height: 100%;
-    padding-top: 40px;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .emailcol {

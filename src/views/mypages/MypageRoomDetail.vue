@@ -9,7 +9,7 @@
                         <v-card-title class="custom-title">
                             <v-text style="font-size : 45px; color:  #69586F">Detail</v-text>
                             <v-col>
-                                <v-card-text>
+                                <v-card-text class="cardText">
                                     <v-row>
                                         <v-col cols="12" md="6">
                                             <!-- 왼쪽 열 -->
@@ -414,5 +414,10 @@ body {
 .modal {
     padding: 20px;
     font-family: "Noto Serif KR", serif;
+}
+.cardText {
+    border: 1px solid #F1F1F1; 
+    padding: 18px; 
+    border-radius: 8px; 
 }
 </style>

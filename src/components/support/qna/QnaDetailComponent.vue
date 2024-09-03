@@ -193,10 +193,13 @@
 
     padding-left:14%;
     padding-top: 10px;
+    font-family: "Noto Serif KR", serif;
   }
   .qna-card {
     width:80%;
     padding: 20px;
+    border: none;
+    box-shadow: none;
   }
   .custom-col-service {
     padding-left: 50px;

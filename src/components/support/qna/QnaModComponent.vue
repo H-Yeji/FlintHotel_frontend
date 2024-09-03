@@ -53,13 +53,26 @@
                             </v-row> 
                         </v-form>
                         <v-row class="justify-end">
-                            <v-btn class="leftbtn" @click="modQna()" style="color: white;" color="#7A6C5B">Submit</v-btn>
+                            <v-btn class="leftbtn" style="color: white;" color="#7A6C5B"
+                            @click="openModiDialog">Submit</v-btn>
                             <v-btn style="color: white;" color="#CFB18E" @click="back()">Cancel</v-btn>
                         </v-row>
                     </v-card-text>
                 </v-card>
             </v-col>
         </v-row>
+
+        <!-- 모달 -->
+        <v-dialog v-model="dialog" max-width="400px">
+            <v-card class="modal">
+                <v-card-title>수정을 완료하시겠습니까?</v-card-title>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn class="leftbtn" color="black" @click="modQna">Yes</v-btn>
+                    <v-btn color="black" @click="cancelModify">No</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
      </v-container> 
   </template>
   
@@ -77,6 +90,7 @@
 
             service: ["Room", "Lounge", "KorDining", "ChiDining", "JapDining"],
             selectedSerivce: null,
+            dialog: false,
         }
     },
     created() {
@@ -105,6 +119,9 @@
                 }
             }
         },
+        openModiDialog() {
+            this.dialog = true;
+        },
         async modQna() {
             try {
                 const qnaId = this.$route.params.id;
@@ -118,7 +135,13 @@
                 const response = await axios.post(`/mypage/qna/update/${qnaId}`, params);
                 console.log(response);
 
-                this.$router.push(`/mypage/qna/detail/${qnaId}`);
+                setTimeout(() => {
+                    alert("QnA 수정이 완료되었습니다.");
+                    this.$router.push(`/mypage/qna/detail/${qnaId}`);
+                }, 100);
+
+                // alert("QnA 수정이 완료되었습니다.");
+                // this.$router.push(`/mypage/qna/detail/${qnaId}`);
             } catch(e) {
                 if (e.response) {
                     console.error("Error Status:", e.response.status);  
@@ -127,7 +150,12 @@
                 } else {
                     console.error("Error Message:", e.message);
                 }
+            } finally {
+                this.dialog = false;
             }
+        },
+        cancelModify() {
+            this.dialog = false;
         },
         async back() {
             const qnaId = this.$route.params.id;
@@ -161,10 +189,14 @@
 
     padding-left:14%;
     padding-top: 10px;
+    font-family: "Noto Serif KR", serif;
   }
   .qna-card {
     width:80%;
     padding: 20px;
+
+    border: none;
+    box-shadow: none;
   }
   .custom-col-service {
     padding-left: 50px;
