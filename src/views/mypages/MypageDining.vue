@@ -10,39 +10,30 @@
               <v-text style="font-size : 45px;">Dining Reservation</v-text>
               <p>온라인 예약에 한해 조회 가능합니다.</p>
               <v-col>
-                <v-card >
+                <v-card>
                   <v-card-text>
-                    <v-data-table>
-                      <thead>
+                    <v-data-table :items="diningList" :headers="tableHeaders" class="elevation-1">
+                      <template v-slot:item="{ item }">
                         <tr>
-                          <!-- <th>예약번호</th> -->
-                          <th style="text-align: center; color:#69586F">Hotel</th>
-                          <th style="text-align: center; color:#69586F">Dining</th>
-                          <th style="text-align: center; color:#69586F">Guests</th>
-                          <th style="text-align: center; color:#69586F">Reservation Date</th>
-                          <th style="text-align: center; color:#69586F">Reservation Status</th>
-                          <th style="text-align: center; color:#69586F">Detail</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="dining in diningList" :key="dining.no">
-                          <!-- <td></td> -->
-                          <td style="text-align: center;">Seoul</td>
-                          <td style="text-align: center;">{{ dining.diningName }}</td>
-                          <td style="text-align: center;">{{ dining.adult + dining.child }}</td>
                           <td style="text-align: center;">
-                            {{ formatDate(dining.reservationDateTime) }}<br />
-                            {{ formatTime(dining.reservationDateTime) }}
+                            <router-link :to="{ name: 'MypageDiningDetail', params: { id: item.id } }">
+                              {{ item.no }}
+                            </router-link>
+                          </td>
+                          <td style="text-align: center;"> Seoul </td>
+                          <td style="text-align: center;"> {{ item.diningName }} </td>
+                          <td style="text-align: center;"> {{ item.adult + item.child }} </td>
+                          <td style="text-align: center;"> 
+                            {{ formatDate(item.reservationDateTime) }}<br />
+                            {{ formatTime(item.reservationDateTime) }}
                           </td>
                           <td style="text-align: center;">
-                            {{ reserveState(dining.reservationDateTime) }}
-                          </td>
-                          <td style="text-align: center; ">
-                            <v-btn style="color:#69586F; border: 0.5px solid #69586F;"
-                              @click="$router.push(`/mypage/dining/detail/${dining.id}`)">Detail</v-btn>
+                            {{
+                              reserveState(item.reservationDateTime)
+                            }}
                           </td>
                         </tr>
-                      </tbody>
+                      </template>
                     </v-data-table>
                   </v-card-text>
                 </v-card>
@@ -64,6 +55,14 @@ export default {
   data() {
     return {
       diningList: [],
+      tableHeaders: [
+          {title:'Reservation No', key:'no', align:'center'},
+          {title:'Hotel', key:'', align:'center'},
+          {title:'Dining', key:'checkInDate', align:'center'},
+          {title:'Guest', key: 'adult'+'child', align: 'center'},
+          {title:'Reservation Time', key:'reservationDateTime', align: 'center'},
+          {title:'Status', align:'center'}
+      ],
     };
   },
   async created() {
@@ -298,7 +297,7 @@ body {
   margin: 0;
   font-family: "Playfair Display", serif;
   background-color: #FFFFFF;
-  
+
   box-shadow: none !important;
 }
 
@@ -317,7 +316,7 @@ body {
   justify-content: left;
 }
 
-.sidebar > a {
+.sidebar>a {
   text-decoration: none;
   color: black;
 }
