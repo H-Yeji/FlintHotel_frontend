@@ -3,7 +3,7 @@ name: deploy to aws s3
 on:
   push:
     branches:
-      - main
+      - Yeji#9
 
 jobs:
   build-and-deploy:
