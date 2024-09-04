@@ -109,7 +109,7 @@
 <script>
 import { ref, computed, onMounted } from 'vue'
 import EmployeeView from '@/views/EmployeeView.vue'
-import axios from '@/axios'
+import axios from 'axios'
 import { useRouter } from 'vue-router'
 
 export default {
@@ -158,7 +158,7 @@ export default {
 
         const fetchEmployees = async () => {
             try {
-                const response = await axios.get(`/employee/list`, {
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/list`, {
                     params: {
                         page: currentPage.value - 1,
                         size: itemsPerPage.value

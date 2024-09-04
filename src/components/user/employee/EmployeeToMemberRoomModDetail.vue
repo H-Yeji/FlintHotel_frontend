@@ -123,7 +123,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -152,7 +152,7 @@ export default {
         async fetchRoomReserveId(reserveId) {
 
             try {
-                const response = await axios.get(`/employee/room/reserve/${reserveId}`);
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/room/reserve/${reserveId}`);
                 console.log("response: ", response.data);
                 const reservationDetail = response.data;
 
@@ -193,7 +193,7 @@ export default {
                     childBfCnt: this.childBfCnt,
                     requestContents: this.requestContents
                 }
-                const response = await axios.post(`/employee/room/modify/${reserveId}`, params);
+                const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/room/modify/${reserveId}`, params);
                 console.log(response);
 
                 setTimeout(() => {

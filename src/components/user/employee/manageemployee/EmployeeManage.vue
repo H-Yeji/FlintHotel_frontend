@@ -116,7 +116,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 import { useRouter } from 'vue-router';
 
 export default {
@@ -147,7 +147,7 @@ export default {
     async created() {
         const employeeId = this.$route.query.id;
         console.log(this.employeeId)
-        const response = await axios.get(`/employee/detail/${employeeId}`);
+        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/detail/${employeeId}`);
         const employeeDetail = response.data.result;
         console.log(employeeDetail);
         this.empNo = employeeDetail.employeeNumber
@@ -168,7 +168,7 @@ export default {
             }
             console.log(this.modData)
             try{
-                const response = await axios.put(`/employee/mod_rank`, this.modData)
+                const response = await axios.put(`${process.env.VUE_APP_API_BASE_URL}/employee/mod_rank`, this.modData)
                 console.log(response.data.status_message);
                 alert("해당 직원의 직급이 변경되었습니다.");
                 window.location.reload()
@@ -182,7 +182,7 @@ export default {
         },
         async handleConfirm() {
             try {
-                const response = await axios.patch(`/employee/delaccount`, { employeeId: this.targetId })
+                const response = await axios.patch(`${process.env.VUE_APP_API_BASE_URL}/employee/delaccount`, { employeeId: this.targetId })
                 if (response.status === 200) {
                     console.log(response.data)
                     alert("해당 직원의 퇴사처리가 완료되었습니다.");

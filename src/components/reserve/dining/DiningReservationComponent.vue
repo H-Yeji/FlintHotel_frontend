@@ -200,7 +200,7 @@
 </template>
 
 <script>
-import axios from "@/axios";
+import axios from "axios";
 import DiningView from "@/views/DiningView.vue";
 import { jwtDecode } from "jwt-decode";
 // import { VTimePicker } from 'vuetify/labs/VTimePicker'
@@ -324,7 +324,7 @@ export default {
       console.log(reservationData);
 
       try {
-        await axios.post(`/reserve/dining/create`, reservationData);
+        await axios.post(`${process.env.VUE_APP_API_BASE_URL}/reserve/dining/create`, reservationData);
         alert("예약이 완료되었습니다.");
         this.$router.push({
           path: "/reserve/dining/success",

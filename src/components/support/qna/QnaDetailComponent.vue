@@ -99,7 +99,7 @@
   
   <script>
   import QnaView from '@/views/QnaView.vue';
-  import axios from '@/axios';
+  import axios from 'axios';
   export default {
     components: {
         QnaView
@@ -122,7 +122,7 @@
         async fetchQnaDetail(qnaId) {
             try {
                 // qna detail
-                const response = await axios.get(`/mypage/qna/detail/${qnaId}`);
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/mypage/qna/detail/${qnaId}`);
                 console.log(response.data);
 
                 this.service = response.data.result.service;
@@ -152,7 +152,7 @@
         async deleteReservation() {
             try {
                 const qnaId = this.$route.params.id;
-                await axios.get(`/mypage/qna/delete/${qnaId}`);
+                await axios.get(`${process.env.VUE_APP_API_BASE_URL}/mypage/qna/delete/${qnaId}`);
 
                 this.$router.push(`/mypage/qna/list`);
             } catch(e) {

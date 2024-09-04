@@ -129,7 +129,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -157,7 +157,7 @@ export default {
     methods: {
         async fetchRoomReserveId(reserveId) {
             try {
-                const response = await axios.get(`/employee/room/reserve/${reserveId}`);
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/room/reserve/${reserveId}`);
                 const reservationDetail = response.data;
 
                 this.roomType = reservationDetail.roomType
@@ -187,7 +187,7 @@ export default {
         async deleteReservation() {
             try {
                 const reserveId = this.$route.params.id;
-                await axios.post(`/employee/room/cancel_reserve_room/${reserveId}`);
+                await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/room/cancel_reserve_room/${reserveId}`);
 
                 this.$router.push(`/employee/room`);
             } catch(e) {

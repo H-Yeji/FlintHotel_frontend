@@ -115,7 +115,7 @@
 <script>
 import QnaView from '../QnaView.vue';
 import MypageComponent from '@/components/MypageComponent.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -146,7 +146,7 @@ export default {
         async fetchReserveDetail(reserveId) {
             try {
                 // qna detail
-                const response = await axios.get(`/reserve/room/detail/${reserveId}`);
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/reserve/room/detail/${reserveId}`);
                 console.log(response.data);
                 this.roomDetail = response.data.result
                 console.log(this.roomDetail)
@@ -172,7 +172,7 @@ export default {
         },
         async deleteReservation() {
             try {
-                const response = await axios.get(`/reserve/room/cancel/${this.reserveId}`);
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/reserve/room/cancel/${this.reserveId}`);
                 console.log(response.data);
                 
                 this.$router.push(`/mypage/room`);

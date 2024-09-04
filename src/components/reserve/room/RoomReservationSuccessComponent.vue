@@ -121,7 +121,7 @@
   
   <script>
   import FlintView from '@/views/FlintView.vue';
-  import axios from '@/axios';
+  import axios from 'axios';
 
   export default {
     components: {
@@ -151,7 +151,7 @@
     methods: {
       async memberInfo() {
         try {
-          const response = await axios.get(`/member/detail`);
+          const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/member/detail`);
           console.log(response.data);
 
           this.firstName = response.data.result.firstName;
@@ -170,7 +170,7 @@
       },
       async reservationInfo() {
         try {
-          const response = await axios.get(`/reserve/room/detail/${this.id}`);
+          const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/reserve/room/detail/${this.id}`);
           const reservations = response.data.result;
           console.log(reservations)
           this.checkInDate = reservations.checkInDate;

@@ -33,7 +33,7 @@
     </v-dialog>
 </template>
 <script>
-import axios from '@/axios'
+import axios from 'axios'
 
 export default {
     props: {
@@ -65,7 +65,7 @@ export default {
                 authCode: this.authCode
             }
             try {
-                const response = await axios.post(`/member/signup/verified`, verifyData)
+                const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/member/signup/verified`, verifyData)
                 alert(response.data?.status_message)
                 this.dialog = false
                 this.$router.push('/member/login')

@@ -78,7 +78,7 @@
   
   <script>
   import QnaView from '@/views/QnaView.vue';
-  import axios from '@/axios';
+  import axios from 'axios';
   export default {
     components: {
         QnaView
@@ -103,7 +103,7 @@
                 const token = localStorage.getItem('membertoken');
                 const headers = {Authorization: `Bearer ${token}`};
 
-                const response = await axios.get(`/mypage/qna/detail/${qnaId}`, {headers});
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/mypage/qna/detail/${qnaId}`, {headers});
                 console.log(response);
 
                 this.selectedSerivce = response.data.result.service;
@@ -132,7 +132,7 @@
                 }
                 console.log("params임: ", params);
 
-                const response = await axios.post(`/mypage/qna/update/${qnaId}`, params);
+                const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/mypage/qna/update/${qnaId}`, params);
                 console.log(response);
 
                 setTimeout(() => {

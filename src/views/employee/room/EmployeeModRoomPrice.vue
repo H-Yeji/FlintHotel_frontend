@@ -33,7 +33,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios'
+import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'vue-router'
 
@@ -66,7 +66,7 @@ export default {
                 this.department = decodedToken.department
 
                 if (this.department === 'Room') {
-                    const response = await axios.get(`/employee/room/roominfo`)
+                    const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/room/roominfo`)
                     this.roomList = response.data.result
                 } else {
                     alert("접근 권한이 없습니다.")
@@ -88,7 +88,7 @@ export default {
         async savePrices() {
             try {
                 const requests = this.roomList.map(room =>
-                    axios.patch(`/employee/room/modprice/${room.id}`, { newPrice: room.roomTypePrice })
+                    axios.patch(`${process.env.VUE_APP_API_BASE_URL}/employee/room/modprice/${room.id}`, { newPrice: room.roomTypePrice })
                 );
                 await Promise.all(requests);
                 alert('가격 수정이 완료되었습니다.');

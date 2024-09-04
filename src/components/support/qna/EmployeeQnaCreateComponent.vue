@@ -79,7 +79,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
   components: {
@@ -104,7 +104,7 @@ export default {
     async fetchQnaDetail() {
       try {
         const id = this.$route.params.id;
-        const response = await axios.get(`/employee/qna/detail/${id}`);
+        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/detail/${id}`);
         console.log(response.data);
 
         this.service = response.data.result.service;
@@ -131,7 +131,7 @@ export default {
           answerTime: this.answerTime
         };
         console.log("params:", params);
-        const response = await axios.post(`/employee/qna/answer/create/${id}`, params);
+        const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/answer/create/${id}`, params);
         console.log("response:", response);
 
         // submit 성공하면 detail로 보내기

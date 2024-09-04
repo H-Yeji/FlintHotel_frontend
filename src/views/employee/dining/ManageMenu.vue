@@ -130,7 +130,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue'
-import axios from '@/axios'
+import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'vue-router'
 import ModMenuModal from '@/views/employee/dining/ModMenuModal.vue'
@@ -205,7 +205,7 @@ export default {
         },
         async fetchMenus() {
             try {
-                const response = await axios.get(`/employee/dining/list`, {
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/dining/list`, {
                     params: {
                         department: this.department,
                         searchType: this.searchType,
@@ -250,7 +250,7 @@ export default {
         },
         async confirmCreateMenu(menuData) {
             try {
-                await axios.post(`/employee/dining/addmenu`, menuData)
+                await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/dining/addmenu`, menuData)
                 this.initialize()
                 this.closeCreateMenuDialog()
             } catch (error) {
@@ -266,7 +266,7 @@ export default {
         },
         async confirmEditMenu(menuData) {
             try {
-                await axios.patch(`/employee/dining/modmenu/${menuData.menuId}`, {
+                await axios.patch(`${process.env.VUE_APP_API_BASE_URL}/employee/dining/modmenu/${menuData.menuId}`, {
                     cost: parseInt(menuData.cost)
                 })
                 this.initialize()
@@ -284,7 +284,7 @@ export default {
         },
         async confirmDeleteMenu(menuId) {
             try {
-                await axios.delete(`/employee/dining/delmenu/${menuId}`)
+                await axios.delete(`${process.env.VUE_APP_API_BASE_URL}/employee/dining/delmenu/${menuId}`)
                 this.menuList = this.menuList.filter(p => p.menuId !== menuId)
                 this.closeDeleteMenuDialog()
             } catch (error) {

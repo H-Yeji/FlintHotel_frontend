@@ -81,7 +81,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -105,7 +105,7 @@ export default {
     methods: {
         async fetchRoomReserveId(memberId) {
             try {
-                const response = await axios.get(`/employee/member/detail/${memberId}`);
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/member/detail/${memberId}`);
                 const memberDetail = response.data.result;
 
                 this.firstName = memberDetail.firstName

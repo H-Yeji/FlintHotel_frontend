@@ -71,7 +71,7 @@
 
 <script>
 import { EventSourcePolyfill } from 'event-source-polyfill';
-import axios from '@/axios'
+import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 
 export default {
@@ -141,7 +141,7 @@ export default {
         try {
           const decodedToken = jwtDecode(token)
           const email = decodedToken.sub
-          const response = await axios.post('/submit', null, { params: { email: email } })
+          const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/submit`, null, { params: { email: email } })
 
           if (response.data && response.data.status_code === 200) {
             const { requestId, position } = response.data.result
@@ -184,7 +184,7 @@ export default {
         const email = decodedToken.sub
 
         // SSE 연결을 초기화하고 이메일을 쿼리 파라미터로 전달
-        this.eventSource = new EventSource(`http://localhost:8080/subscribe?email=${encodeURIComponent(email)}`)
+        this.eventSource = new EventSource(`${process.env.VUE_APP_API_BASE_URL}/subscribe?email=${encodeURIComponent(email)}`)
 
         this.eventSource.onopen = () => {
           // console.log("SSE 연결이 성공적으로 열렸습니다:", this.eventSource.url)
@@ -259,7 +259,7 @@ export default {
       this.closeSSEConnection() // SSE 연결 종료
 
       if (this.requestId) {
-        axios.delete(`/leave/${this.requestId}`)
+        axios.delete(`${process.env.VUE_APP_API_BASE_URL}/leave/${this.requestId}`)
           .then(response => {
             if (response.status === 204) {
               this.requestId = ""

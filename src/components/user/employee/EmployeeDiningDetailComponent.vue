@@ -113,7 +113,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -175,7 +175,7 @@ export default {
         async DiningCancel(){
             try {
                 const id = this.$route.params.diningReservationId;
-                await axios.get(`/employee/dining/cancel_reserve_dining/${id}`);
+                await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/dining/cancel_reserve_dining/${id}`);
 
                 this.$router.push(`/employee/dining`);
             } catch(e) {

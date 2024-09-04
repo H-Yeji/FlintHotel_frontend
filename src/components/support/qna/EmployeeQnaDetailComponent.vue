@@ -132,7 +132,7 @@
   
   <script>
   import EmployeeView from '@/views/EmployeeView.vue';
-  import axios from '@/axios';
+  import axios from 'axios';
   
   export default {
     components: {
@@ -157,7 +157,7 @@
       async fetchQnaDetail() {
         try {
           const id = this.$route.params.id;
-          const response = await axios.get(`/employee/qna/detail/${id}`);
+          const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/detail/${id}`);
           console.log(response.data);
   
           this.service = response.data.result.service;
@@ -180,7 +180,7 @@
       async qnaDelete() {
         try {
             const id = this.$route.params.id;
-            const response = await axios.post(`/employee/qna/answer/delete/${id}`);
+            const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/answer/delete/${id}`);
             console.log(response.data);
 
             // 삭제 후 QnA 리스트 페이지로 이동

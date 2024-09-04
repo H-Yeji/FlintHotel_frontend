@@ -38,7 +38,7 @@
   
   <script>
   import QnaView from '@/views/QnaView.vue';
-import axios from '@/axios';
+import axios from 'axios';
   export default {
     components: {
         QnaView
