@@ -8,6 +8,7 @@ import 'v-calendar/style.css'; // VCalendar의 CSS를 로드합니다.
 import store from './store/index'; // 상태관리 (전역변수)
 import VueDatePicker from '@vuepic/vue-datepicker'; // VueDatePicker 컴포넌트
 import '@vuepic/vue-datepicker/dist/main.css'; // VueDatePicker의 CSS를 로드합니다.
+import axios from 'axios';
 
 const app = createApp(App);
 
@@ -21,7 +22,7 @@ app.component('VueDatePicker', VueDatePicker);
 
 app.mount('#app');
 
-instance.interceptors.request.use(
+axios.interceptors.request.use(
     config => {
       let token = localStorage.getItem('employeetoken') || localStorage.getItem('membertoken')
       if (token) {
@@ -34,7 +35,7 @@ instance.interceptors.request.use(
     }
   )
   
-  instance.interceptors.response.use(
+  axios.interceptors.response.use(
       response => response,
       async error => {
           if(error.response && error.response.status === 401){
