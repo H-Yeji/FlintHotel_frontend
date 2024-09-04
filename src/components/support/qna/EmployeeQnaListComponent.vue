@@ -17,7 +17,7 @@
                                             <v-text-field class="tf" v-model="email"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="3" class="search">
-                                            <v-btn @click="searchMember" style="color: white; font-size: 14px;" color="#7A6C5B">Search</v-btn>
+                                            <v-btn @click="searchMember" style="color: white; font-size: 15px;" color="#7A6C5B">Search</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-col>
@@ -41,7 +41,7 @@
                                                 <td>{{ formatDate(q.writeTime) }}</td>
                                                 <td>
                                                     <v-btn @click="diningDetail(q.id)"
-                                                        style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 14px;">
+                                                        style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px;">
                                                         Detail
                                                     </v-btn>
                                                 </td>
@@ -53,7 +53,7 @@
                                             :disabled="currentPage === 1"
                                             @click="previousPage"
                                             color="#7A6C5B"
-                                            style="font-size: 14px;"
+                                            style="font-size: 15px;"
                                             outlined>
                                             이전 페이지
                                         </v-btn>
@@ -61,7 +61,7 @@
                                             :disabled="currentPage >= totalPages"
                                             @click="nextPage"
                                             color="#7A6C5B"
-                                            style="font-size: 14px;"
+                                            style="font-size: 15px;"
                                             outlined>
                                             다음 페이지
                                         </v-btn>

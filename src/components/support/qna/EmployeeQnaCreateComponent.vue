@@ -67,7 +67,7 @@
                 </v-card-text>
               </v-card>
               <v-row class="justify-end" style="padding-top: 55px;">
-                <v-btn class="center" style="color: white; width:600px; margin-right:50px; font-size: 14px;" color="#7A6C5B" @click="submit">Submit</v-btn>
+                <v-btn class="center" style="color: white; width:600px; margin-right:50px; font-size: 15px;" color="#7A6C5B" @click="submit">Submit</v-btn>
               </v-row>
             </v-card-text>
           </v-card>
@@ -169,6 +169,8 @@ export default {
 .qna-card {
   width: 80%;
   padding: 20px;
+  border: none;
+  box-shadow: none;
 }
 .custom-col-service {
   padding-left: 50px;

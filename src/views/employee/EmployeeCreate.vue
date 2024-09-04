@@ -71,7 +71,7 @@
           </v-row>
           <v-row>
             <v-col cols="12">
-              <v-btn @click="employeeCreate" class="createBtn" style="background-color: #7A6C5B; color:white; font-size: 14px;">Add Employee</v-btn>
+              <v-btn @click="employeeCreate" class="createBtn" style="background-color: #7A6C5B; color:white; font-size: 15px;">Add Employee</v-btn>
             </v-col>
           </v-row>
         </v-container>

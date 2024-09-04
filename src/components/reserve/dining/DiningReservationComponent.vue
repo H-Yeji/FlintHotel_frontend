@@ -17,17 +17,17 @@
                       <th class="text-center">ADULT</th>
                       <th class="text-center">CHILD</th>
                       <th class="text-center">
-                        <v-btn style="background-color: #7A6C5B; color: white;" @click="showCalendar">show Calendar</v-btn>
+                        <v-btn style="background-color: #7A6C5B; color: white; font-size: 15px;" @click="showCalendar">show Calendar</v-btn>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td class="button-group" style="padding-top: 10px; color: black;">
-                        <v-btn v-bind:color="diningId===1 ? '#7A6C5B' : ''" class="custom-button" @click="selectDining(1)">Korea</v-btn>
-                            <v-btn v-bind:color="diningId===2 ? '#7A6C5B' : ''" class="custom-button" @click="selectDining(2)">China</v-btn>
-                            <v-btn v-bind:color="diningId===3 ? '#7A6C5B' : ''" class="custom-button" @click="selectDining(3)">Japan</v-btn>
-                            <v-btn v-bind:color="diningId===4 ? '#7A6C5B' : ''" class="custom-button" @click="selectDining(4)">Lounge</v-btn>
+                      <td class="button-group" style="padding-top: 10px;">
+                        <v-btn v-bind:color="diningId===1 ? '#7A6C5B' : ''" class="custom-button" style="color: black; font-size:15px;" @click="selectDining(1)">Korea</v-btn>
+                        <v-btn v-bind:color="diningId===2 ? '#7A6C5B' : ''" class="custom-button" style="color: black; font-size:15px;" @click="selectDining(2)">China</v-btn>
+                        <v-btn v-bind:color="diningId===3 ? '#7A6C5B' : ''" class="custom-button" style="color: black; font-size:15px;" @click="selectDining(3)">Japan</v-btn>
+                        <v-btn v-bind:color="diningId===4 ? '#7A6C5B' : ''" class="custom-button" style="color: black; font-size:15px;" @click="selectDining(4)">Lounge</v-btn>
                       </td>
                       <td style="padding-left: 63px; padding-top: 10px;">
                         <v-text-field type="number" v-model="adult" min="0" style="width: 70px;"></v-text-field>
@@ -88,7 +88,7 @@
                       </v-col>
                     </v-row>
                     <v-row style="padding-left: 450px; padding-bottom: 10px; margin-top: -50px;">
-                      <v-btn type="submit" class="text-center custom-btn" style="background-color: #7A6C5B; color: white;">Reservation</v-btn>
+                      <v-btn type="submit" class="text-center custom-btn" style="background-color: #7A6C5B; color: white; font-size: 15px;">Reservation</v-btn>
                     </v-row>
                   </v-card-text>
                 </v-card>

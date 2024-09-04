@@ -11,7 +11,7 @@
                             <!-- 검색 바 추가 -->
                             <v-row class="searchrow d-flex justify-space-between">
                                 <v-col cols="12" md="4" class="d-flex justify-start" style="margin-left:-30px;">
-                                    <v-btn @click="createEmployee" color="#7A6C5B" style="font-size: 14px;" elevation="0" outlined>Add
+                                    <v-btn @click="createEmployee" color="#7A6C5B" style="font-size: 15px;" elevation="0" outlined>Add
                                         Employee</v-btn>
                                 </v-col>
 
@@ -68,7 +68,7 @@
                                                 <td>{{ emp.department }}</td>
                                                 <td>
                                                     <v-btn
-                                                        style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; margin-top:4px; font-size: 14px;"
+                                                        style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; margin-top:4px; font-size: 15px;"
                                                         :to="{ path: './office/manage', query: { id: emp.id } }">Detail
                                                     </v-btn>
                                                 </td>
@@ -81,7 +81,7 @@
                                             :disabled="currentPage === 1"
                                             @click="previousPage"
                                             color="primary"
-                                            style="font-size: 14px;"
+                                            style="font-size: 15px;"
                                             outlined
                                         >
                                             이전 페이지
@@ -90,7 +90,7 @@
                                             :disabled="currentPage === totalPages"
                                             @click="nextPage"
                                             color="primary"
-                                            style="font-size: 14px;"
+                                            style="font-size: 15px;"
                                             outlined
                                         >
                                             다음 페이지

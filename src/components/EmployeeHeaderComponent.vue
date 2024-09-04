@@ -28,12 +28,12 @@
             <v-row class="button-row" justify="center">
               <v-col cols="6" md="6" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" style="color: black; background-color: #E5E5E5; 
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 14px;"
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 15px;"
                   @click="memberListBtn">Member List</v-btn>
               </v-col>
               <v-col cols="6" md="6" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" style="color: black; background-color: #E5E5E5;
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 14px;"
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 15px;"
                   @click="qnaManageBtn">QnA Manage</v-btn>
               </v-col>
             </v-row>
@@ -50,10 +50,10 @@
             <v-row class="button-row" justify="center">
               <v-col cols="12" md="8" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" v-if="isDining" @click="navigateToMenu" style="color: black; background-color: #E5E5E5; 
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 14px;">Menu
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 15px;">Menu
                   Manage</v-btn>
                 <v-btn class="custom-btn" size="large" v-if="isRoom" @click="navigateToMenu" style="color: black; background-color: #E5E5E5; 
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 14px;">Room
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 15px;">Room
                   Price</v-btn>
               </v-col>
             </v-row>
@@ -327,7 +327,7 @@ export default {
 
 <style scoped>
 .flint-hotel-title {
-  font-size: 14px !important;
+  font-size: 15px !important;
   font-family: "Playfair Display", serif;
 }
 

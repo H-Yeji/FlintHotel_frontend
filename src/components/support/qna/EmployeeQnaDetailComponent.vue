@@ -97,7 +97,7 @@
                   <v-btn
                     v-if="!answer || answer === '답변이 없습니다. 답변을 달아주세요. '"
                     class="center"
-                    style="color: white; width: 600px; margin-right: 50px; font-size: 14px;"
+                    style="color: white; width: 600px; margin-right: 50px; font-size: 15px;"
                     color="#7A6C5B"
                     @click="qnaCreate($route.params.id)"
                   >
@@ -107,14 +107,14 @@
                   <template v-else>
                     <v-btn
                       class="leftbtn"
-                      style="color: white; font-size: 14px;"
+                      style="color: white; font-size: 15px;"
                       color="#7A6C5B"
                       @click="qnaModify($route.params.id)"
                     >
                       Modify
                     </v-btn>
                     <v-btn
-                      style="color: white; font-size: 14px;"
+                      style="color: white; font-size: 15px;"
                       color="#CFB18E"
                       @click="qnaDelete"
                     >

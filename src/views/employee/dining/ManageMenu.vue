@@ -10,7 +10,7 @@
                             <v-row class="searchrow d-flex justify-space-between">
                                 <!-- 메뉴 추가 버튼: 왼쪽 정렬 -->
                                 <v-col cols="12" md="3" v-if="canAccess" class="d-flex justify-start" style="margin-top:7px; margin-left:-30px;">
-                                    <v-btn @click="openCreateMenuDialog" color="#7A6C5B" style="font-size: 14px;" elevation="0" outlined>Add Menu</v-btn>
+                                    <v-btn @click="openCreateMenuDialog" color="#7A6C5B" style="font-size: 15px;" elevation="0" outlined>Add Menu</v-btn>
                                 </v-col>
                                 <!-- 검색 관련 요소: 오른쪽 정렬 -->
                                 <v-col cols="12" md="9" class="justify-end">
@@ -37,7 +37,7 @@
                                             </v-text-field>
                                         </v-col>
                                         <v-col cols="auto">
-                                            <v-btn type="submit" style="background-color:#DCC8B0; color:white; font-size: 14px;" elevation="0" outlined>Search</v-btn>
+                                            <v-btn type="submit" style="background-color:#DCC8B0; color:white; font-size: 15px;" elevation="0" outlined>Search</v-btn>
                                         </v-col>
                                     </v-form>
                                 </v-col>
@@ -66,9 +66,9 @@
                                                 <td class="name-column-value" style="padding-left:50px;">{{ p.menuName }}</td>
                                                 <td class="price-column-value" style="padding-left:50px;">{{ p.cost }}원</td>
                                                 <td class="col-action">
-                                                    <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 14px;" 
+                                                    <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px;" 
                                                     @click="openEditMenuDialog(p)" elevation="0" outlined small>Modify</v-btn>
-                                                    <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 14px;" 
+                                                    <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px;" 
                                                     @click="openDeleteMenuDialog(p.menuId)" elevation="0" outlined small>Delete</v-btn>
                                                 </td>
                                             </tr>
@@ -80,7 +80,7 @@
                                             :disabled="currentPage === 1"
                                             @click="previousPage"
                                             color="primary"
-                                            style="font-size: 14px;"
+                                            style="font-size: 15px;"
                                             outlined
                                         >
                                             이전 페이지
@@ -89,7 +89,7 @@
                                             :disabled="currentPage === totalPages"
                                             @click="nextPage"
                                             color="primary"
-                                            style="font-size: 14px;"
+                                            style="font-size: 15px;"
                                             outlined
                                         >
                                             다음 페이지

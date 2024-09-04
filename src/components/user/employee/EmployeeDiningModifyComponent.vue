@@ -85,7 +85,7 @@
                         </v-card-text>
                         <!-- 버튼 추가 -->
                         <v-card-actions class="justify-end">
-                            <v-btn style="color: white; background-color: #7A6C5B; margin-top: 20px; margin-right: 10px; font-size: 14px;" @click="modify">Modify Completed</v-btn>
+                            <v-btn style="color: white; background-color: #7A6C5B; margin-top: 20px; margin-right: 10px; font-size: 15px;" @click="modify">Modify Completed</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-col>

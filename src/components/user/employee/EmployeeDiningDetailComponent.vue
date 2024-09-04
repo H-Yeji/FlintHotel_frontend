@@ -89,8 +89,8 @@
                         </v-card-text>
                           <!-- 버튼 추가 -->
                         <v-row class="justify-end">
-                            <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px; font-size: 14px;" @click="DiningModify($route.params.diningReservationId)">Modify</v-btn>
-                            <v-btn style="color: white; background-color: #CFB18E; margin-top:20px; font-size: 14px;" @click="openDeleteDialog">Cancel</v-btn>
+                            <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px; font-size: 15px;" @click="DiningModify($route.params.diningReservationId)">Modify</v-btn>
+                            <v-btn style="color: white; background-color: #CFB18E; margin-top:20px; font-size: 15px;" @click="openDeleteDialog">Cancel</v-btn>
                         </v-row>            
                     </v-card>
                 </v-col>

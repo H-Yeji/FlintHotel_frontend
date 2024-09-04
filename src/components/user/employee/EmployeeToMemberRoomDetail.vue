@@ -100,10 +100,10 @@
                                 </v-col>
                             </v-row>
                             <v-row class="justify-end">
-                                <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px; font-size: 14px;"
+                                <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px; font-size: 15px;"
                                 @click="$router.push({ name: 'EmployeeToMemberRoomModDetail', params: { id: this.$route.params.id } })"
                                 >Modify</v-btn>
-                                <v-btn class="leftbtn" style="color: white; background-color: #CFB18E; margin-top:20px; font-size: 14px;"
+                                <v-btn class="leftbtn" style="color: white; background-color: #CFB18E; margin-top:20px; font-size: 15px;"
                                  @click="openDeleteDialog"
                                 >Delete</v-btn>
                             </v-row>

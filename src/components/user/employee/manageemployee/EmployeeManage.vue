@@ -87,8 +87,8 @@
                                                 readonly></v-text-field>
                                         </v-col>
                                         <v-row class="justify-end">
-                                            <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px; font-size: 14px;" @click="modifyRank()">Change Rank</v-btn>
-                                            <v-btn style="color: white; background-color: #CFB18E; margin-top:20px; font-size: 14px;" @click="confirmDelEmployee()">Delete Employee</v-btn>
+                                            <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px; font-size: 15px;" @click="modifyRank()">Change Rank</v-btn>
+                                            <v-btn style="color: white; background-color: #CFB18E; margin-top:20px; font-size: 15px;" @click="confirmDelEmployee()">Delete Employee</v-btn>
                                         </v-row>
                                     </v-row>
                                 </v-col>

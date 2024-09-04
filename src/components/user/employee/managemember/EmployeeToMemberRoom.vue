@@ -17,7 +17,7 @@
                                             <v-text-field class="tf" v-model="email"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="3" class="search">
-                                            <v-btn @click="searchMember()" style="color: white; font-size: 14px;"
+                                            <v-btn @click="searchMember()" style="color: white; font-size: 15px;"
                                                 color="#7A6C5B">Search</v-btn>
                                         </v-col>
                                     </v-row>
