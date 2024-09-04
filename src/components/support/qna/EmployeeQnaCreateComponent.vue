@@ -153,6 +153,7 @@ export default {
   text-align: center;
 }
 .qna-container {
+  font-family: "Noto Serif KR", serif;
   background-color: white;
   position: absolute;
   width: 90%;
