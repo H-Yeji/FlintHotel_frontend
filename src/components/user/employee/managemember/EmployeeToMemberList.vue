@@ -55,6 +55,7 @@ export default {
         }
     },
     async created() {
+        console.log(process.env.VUE_APP_API_BASE_URL);
         const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/memberlist`);
         this.member = response.data.result
         console.log(this.member)
