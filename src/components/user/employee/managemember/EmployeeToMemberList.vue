@@ -57,7 +57,7 @@ export default {
     async created() {
         try {
             console.log(process.env.VUE_APP_API_BASE_URL);
-            const response = await axios.get(`https://${process.env.VUE_APP_API_BASE_URL}/employee/memberlist`);
+            const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/memberlist`);
 
             console.log("목록: ", response.data.result);
 
