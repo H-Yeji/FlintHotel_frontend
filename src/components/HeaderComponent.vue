@@ -38,12 +38,12 @@
               <v-row class="button-row" justify="center">
                 <v-col cols="6" md="6" class="d-flex justify-center">
                   <v-btn class="custom-btn" size="large" style="color: black; background-color: white; border-color: #D5DCEA; border-width: 3px;
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none;"
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none; font-size: 14px;"
                     @click="RoomReservationBtn">Room</v-btn>
                 </v-col>
                 <v-col cols="6" md="6" class="d-flex justify-center">
                   <v-btn class="custom-btn" size="large" style="color: black; background-color: white; border-color: #D5DCEA; border-width: 3px;
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none;"
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none; font-size: 14px;"
                     @click="DiningReservationBtn">Dining</v-btn>
                 </v-col>
               </v-row>
@@ -59,7 +59,7 @@
               <p>현재 대기 순서: {{ currentPosition - 45 }}번째 입니다.</p>
             </v-card-text>
             <v-card-actions>
-              <v-btn @click="handleDialogClose" style="color:#787878; font-family: 'Noto Serif KR', serif;">닫기</v-btn>
+              <v-btn @click="handleDialogClose" style="color:#787878; font-size: 14px; font-family: 'Noto Serif KR', serif;">닫기</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>

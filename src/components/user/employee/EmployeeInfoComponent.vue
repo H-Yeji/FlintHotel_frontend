@@ -92,6 +92,7 @@
                       color: white;
                       background-color: #7a6c5b;
                       margin-right: 10px;
+                      font-size: 14px;
                     "
                     @click="openModifyDialog"
                   >

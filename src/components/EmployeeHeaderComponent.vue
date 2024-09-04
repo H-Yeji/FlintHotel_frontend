@@ -28,12 +28,12 @@
             <v-row class="button-row" justify="center">
               <v-col cols="6" md="6" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" style="color: black; background-color: #E5E5E5; 
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none;"
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 14px;"
                   @click="memberListBtn">Member List</v-btn>
               </v-col>
               <v-col cols="6" md="6" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" style="color: black; background-color: #E5E5E5;
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none;"
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 14px;"
                   @click="qnaManageBtn">QnA Manage</v-btn>
               </v-col>
             </v-row>
@@ -50,10 +50,10 @@
             <v-row class="button-row" justify="center">
               <v-col cols="12" md="8" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" v-if="isDining" @click="navigateToMenu" style="color: black; background-color: #E5E5E5; 
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none;">Menu
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 14px;">Menu
                   Manage</v-btn>
                 <v-btn class="custom-btn" size="large" v-if="isRoom" @click="navigateToMenu" style="color: black; background-color: #E5E5E5; 
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none;">Room
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 14px;">Room
                   Price</v-btn>
               </v-col>
             </v-row>
@@ -80,7 +80,7 @@
             </div>
           </v-card-text>
           <v-card-actions>
-            <v-btn @click="closeDiningReservationModal" style="color: black; font-size: 18px;">Close</v-btn>
+            <v-btn @click="closeDiningReservationModal" style="color: black; font-size: 16px;">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -105,7 +105,7 @@
           </v-card-text>
           <v-card-actions>
             <!-- <v-btn @click="goToRoomReservationDetails">Details</v-btn> -->
-            <v-btn @click="closeRoomReservationModal" style="color: black; font-size: 18px;">Close</v-btn>
+            <v-btn @click="closeRoomReservationModal" style="color: black; font-size: 16px;">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

@@ -100,7 +100,7 @@
                                 </v-col>
                             </v-row>
                             <v-row class="justify-end">
-                                <v-btn  @click="openModiDialog" style="color: white; background-color: #7A6C5B; margin-top: 20px;">Submit</v-btn>
+                                <v-btn  @click="openModiDialog" style="color: white; background-color: #7A6C5B; margin-top: 20px; font-size: 14px;">Submit</v-btn>
                             </v-row>
                         </v-card-text>
                     </v-card>
