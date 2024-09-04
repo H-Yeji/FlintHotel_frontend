@@ -1,5 +1,6 @@
 <template>
-  <!-- 네비게이션바 -->
+  <v-app>
+    <!-- 네비게이션바 -->
   <v-app-bar app dark dense>
     <v-container>
       <!-- 행의 자식 요소들을 중앙정렬  -->
@@ -111,6 +112,7 @@
       </v-dialog>
     </v-container>
   </v-app-bar>
+  </v-app>
 </template>
 <script>
 import { jwtDecode } from 'jwt-decode';
