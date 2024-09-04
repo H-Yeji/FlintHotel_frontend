@@ -72,7 +72,7 @@ export default {
 
     const login = async () => {
       try {
-        const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}${props.loginEndpoint}`, {
+        const response = await axios.post(props.loginEndpoint, {
           email: email.value,
           password: password.value,
         })
