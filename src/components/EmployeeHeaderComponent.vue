@@ -1,17 +1,16 @@
 <template>
-  <v-app>
-    <!-- 네비게이션바 -->
+  <!-- 네비게이션바 -->
   <v-app-bar app dark dense>
     <v-container>
       <!-- 행의 자식 요소들을 중앙정렬  -->
       <v-row align="center" no-gutters class="flex-nowrap justify-space-between">
       <!-- 좌측 버튼들 -->
       <v-col class="d-flex justify-start" cols="auto">
-        <v-btn @click="openDiningReservationModal()" class="mx-2">Dining({{ newDiningReservationCount }})</v-btn>
-        <v-btn @click="openRoomReservationModal()" class="mx-2">Room({{ newReservationCount }})</v-btn>
-        <v-btn @click="openMemberDialog" class="mx-2">Member</v-btn>
-        <v-btn v-if="department === 'Office'" :to="{ path: `/employee/${dept}` }" class="mx-2">{{ manage }}</v-btn>
-        <v-btn v-else @click="openManageDialog" class="mx-2">{{ manage }}</v-btn>
+        <v-btn @click="openDiningReservationModal()" class="mx-2" style="color: black;">Dining({{ newDiningReservationCount }})</v-btn>
+        <v-btn @click="openRoomReservationModal()" class="mx-2" style="color: black;">Room({{ newReservationCount }})</v-btn>
+        <v-btn @click="openMemberDialog" class="mx-2" style="color: black;">Member</v-btn>
+        <v-btn v-if="department === 'Office'" :to="{ path: `/employee/${dept}` }" class="mx-2" style="color: black;">{{ manage }}</v-btn>
+        <v-btn v-else @click="openManageDialog" class="mx-2" style="color: black;">{{ manage }}</v-btn>
       </v-col>
       <!-- 우측 버튼들 -->
       <v-col class="d-flex justify-end" cols="auto">
@@ -81,7 +80,7 @@
             </div>
           </v-card-text>
           <v-card-actions>
-            <v-btn @click="closeDiningReservationModal">Close</v-btn>
+            <v-btn @click="closeDiningReservationModal" style="color: black;">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -106,13 +105,12 @@
           </v-card-text>
           <v-card-actions>
             <!-- <v-btn @click="goToRoomReservationDetails">Details</v-btn> -->
-            <v-btn @click="closeRoomReservationModal">Close</v-btn>
+            <v-btn @click="closeRoomReservationModal" style="color: black;">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-container>
   </v-app-bar>
-  </v-app>
 </template>
 <script>
 import { jwtDecode } from 'jwt-decode';

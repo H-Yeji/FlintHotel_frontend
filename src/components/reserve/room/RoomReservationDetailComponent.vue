@@ -54,9 +54,9 @@
                                 <div>성인 조식/50,000원</div>
                             </v-col>
                             <v-col cols="7" class="d-flex align-center" style="padding-left:20px;">
-                                <v-btn icon @click="decrementAdultBreakfast()">-</v-btn>
+                                <v-btn icon @click="decrementAdultBreakfast()" style="color: black;">-</v-btn>
                                 <span style="padding: 0 8px;">{{ adultBreakfastCount }}</span>
-                                <v-btn icon @click="incrementAdultBreakfast()">+</v-btn>
+                                <v-btn icon @click="incrementAdultBreakfast()" style="color: black;">+</v-btn>
                             </v-col>
                         </v-row>
                         <v-row>
@@ -64,9 +64,9 @@
                                 <div>어린이 조식/35,000원</div>
                             </v-col>
                             <v-col cols="7" class="d-flex align-center" style="padding-left:20px;">
-                                <v-btn icon @click="decrementChildBreakfast()">-</v-btn>
+                                <v-btn icon @click="decrementChildBreakfast()" style="color: black;">-</v-btn>
                                 <span style="padding: 0 8px;">{{ childBreakfastCount }}</span>
-                                <v-btn icon @click="incrementChildBreakfast()">+</v-btn>
+                                <v-btn icon @click="incrementChildBreakfast()" style="color: black;">+</v-btn>
                             </v-col>
                         </v-row>
                         <v-row>
