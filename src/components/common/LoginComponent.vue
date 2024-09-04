@@ -21,7 +21,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import FindEmailModal from './FindEmailModal.vue'
 import FindPasswordModal from './FindPasswordModal.vue'
-import axios from '@/axios'
+import axios from 'axios'
 
 export default {
   name: 'LoginComponent',
