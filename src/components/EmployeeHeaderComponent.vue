@@ -325,9 +325,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .flint-hotel-title {
-  font-size: 18px;
+  font-size: 14px !important;
   font-family: "Playfair Display", serif;
 }
 
