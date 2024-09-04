@@ -11,8 +11,8 @@
         <a v-if="showJoinLink" :href="joinLink" class="link">JOIN</a>
       </div>
     </div>
-    <FindEmailModal v-model="dialog1" @close="closeFindEmailModal" :findEmailEndpoint="findEmailEndpoint" />
-    <FindPasswordModal v-model="dialog2" @close="closeFindPasswordModal" :findPasswordEndpoint="findPasswordEndpoint" />
+    <FindEmailModal v-model="dialog1" @close="closeFindEmailModal" :findEmailEndpoint="`${process.env.VUE_APP_API_BASE_URL}${findEmailEndpoint}`" />
+    <FindPasswordModal v-model="dialog2" @close="closeFindPasswordModal" :findPasswordEndpoint="`${process.env.VUE_APP_API_BASE_URL}${findPasswordEndpoint}`" />
   </div>
 </template>
 
@@ -72,7 +72,7 @@ export default {
 
     const login = async () => {
       try {
-        const response = await axios.post(props.loginEndpoint, {
+        const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}${props.loginEndpoint}`, {
           email: email.value,
           password: password.value,
         })
