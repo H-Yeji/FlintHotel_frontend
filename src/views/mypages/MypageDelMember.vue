@@ -7,8 +7,8 @@
           <MypageComponent />
           <v-col cols="9" justify="center">
             <v-card-title class="custom-title">
-              <v-text style="font-size : 45px;">Account Deletion</v-text>
-              <p> {{ memberName }} 님의 정보를 안전하게 보호하기 위해 비밀번호를 다시
+              <v-text style="font-size : 38px;">Account Deletion</v-text>
+              <p style="font-size: 18px;"> {{ memberName }} 님의 정보를 안전하게 보호하기 위해 비밀번호를 다시
                 한번 확인합니다.</p>
                 <v-card style="width:90%;">
                   <v-card-text style="padding-top : 50px">
@@ -28,7 +28,7 @@
                   </v-card-text>
                 </v-card>
                 <v-row class="justify-end text-align: right" style="padding-right: 100px; padding-top: 25px; padding-bottom: 20px;">
-                  <v-btn @click="memberDelete()" style="color:#69586F; border: 0.5px solid #69586F;">
+                  <v-btn @click="memberDelete()" style="color:#69586F; border: 0.5px solid #69586F; font-size: 15px;">
                       CONFIRM
                   </v-btn>
               </v-row>

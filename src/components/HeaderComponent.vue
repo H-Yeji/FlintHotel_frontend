@@ -23,11 +23,11 @@
       :style="{ transition: 'transform 0.3s ease-in-out', transform: isScrolled ? 'translateY(-100%)' : 'translateY(0)' }">
       <v-container>
         <v-row justify="center" style="padding-right: 30px;">
-          <v-btn text style="color:#FFFFFF; font-size: 15px;">INTRODUCE</v-btn>
-          <v-btn text style="color:#FFFFFF; font-size: 15px;" @click="openReservationDialog">RESERVATION</v-btn>
+          <v-btn text style="color:#FFFFFF; font-size: 16px;">INTRODUCE</v-btn>
+          <v-btn text style="color:#FFFFFF; font-size: 16px;" @click="openReservationDialog">RESERVATION</v-btn>
           <v-btn text style="font-size: 40px; color:#FFFFFF" @click="$router.push('/')">FLINT HOTEL</v-btn>
-          <v-btn text style="color:#FFFFFF; font-size: 15px;">DINING</v-btn>
-          <v-btn text style="color:#FFFFFF; font-size: 15px;">ROOM</v-btn>
+          <v-btn text style="color:#FFFFFF; font-size: 16px;">DINING</v-btn>
+          <v-btn text style="color:#FFFFFF; font-size: 16px;">ROOM</v-btn>
         </v-row>
 
         <!-- reservation 클릭 후 > 모달창 -->
@@ -284,7 +284,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .login-nav {
   z-index: 10;
   margin-top: -25px;

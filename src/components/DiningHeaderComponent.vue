@@ -30,11 +30,11 @@
       >
       <v-container>
         <v-row justify="center" style="padding-right: 30px;">
-          <v-btn text style="color:#4F4337;">INTRODUCE</v-btn>
-          <v-btn text style="color:#4F4337;" @click="openReservationDialog">RESERVATION</v-btn>
+          <v-btn text style="color:#4F4337; font-size: 16px;">INTRODUCE</v-btn>
+          <v-btn text style="color:#4F4337; font-size: 16px;" @click="openReservationDialog">RESERVATION</v-btn>
           <v-btn text style="font-size: 40px; color:#4F4337;" @click="$router.push('/')">FLINT HOTEL</v-btn>
-          <v-btn text style="color:#4F4337" :to="{path:'/reserve/dining/create'}">DINING</v-btn>
-          <v-btn text style="color:#4F4337;">ROOM</v-btn>
+          <v-btn text style="color:#4F4337; font-size: 16px;" :to="{path:'/reserve/dining/create'}">DINING</v-btn>
+          <v-btn text style="color:#4F4337; font-size: 16px;">ROOM</v-btn>
         </v-row>
 
         <!-- reservation 클릭 후 > 모달창 -->
@@ -45,11 +45,11 @@
             <v-row class="button-row" justify="center">
               <v-col cols="6" md="6" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" style="color: black; background-color: white; border-color: #D5DCEA; border-width: 3px;
-                padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none;" @click="RoomReservationBtn">Room</v-btn>
+                padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none; font-size: 15px;" @click="RoomReservationBtn">Room</v-btn>
               </v-col>
               <v-col cols="6" md="6" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" style="color: black; background-color: white; border-color: #D5DCEA; border-width: 3px;
-                padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none;" @click="DiningReservationBtn">Dining</v-btn>
+                padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none; font-size: 15px;" @click="DiningReservationBtn">Dining</v-btn>
               </v-col>
             </v-row>
           </v-card-text>
@@ -110,7 +110,7 @@
   };
   </script>
   
-  <style>  
+  <style scoped>  
     .login-nav {
     z-index: 10;
     margin-top:-25px;

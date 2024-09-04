@@ -63,7 +63,7 @@
                                     <v-row>
                                         <v-col>
                                             <v-row class="justify-end text-align: right" style="padding-right: 20px;">
-                                                <v-btn @click="openDeleteDialog" style="color:#69586F; border: 0.5px solid #69586F;">
+                                                <v-btn @click="openDeleteDialog" style="color:#69586F; border: 0.5px solid #69586F; font-size: 15px;">
                                                     DELETE
                                                 </v-btn>
                                             </v-row>

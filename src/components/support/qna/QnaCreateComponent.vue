@@ -30,7 +30,7 @@
                                 required
                                 ></v-textarea>  
                         </v-form>
-                        <v-btn class="submitbtn" @click="submit()" style="color: white;" color="#7A6C5B" block>Submit</v-btn>
+                        <v-btn class="submitbtn" @click="submit()" style="color: white; font-size: 15px;" color="#7A6C5B" block>Submit</v-btn>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -99,6 +99,7 @@
     text-align: center;
   }
   .qna-container {
+    font-family: "Noto Serif KR", serif;
     background-color: white;
     position: absolute;
     width: 90%;
@@ -118,6 +119,6 @@
     padding: 20px;
   }
   .submitbtn {
-    left: -30px;
+    
   }
   </style>

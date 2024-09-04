@@ -68,7 +68,7 @@
         </v-row>
         <v-row>
           <v-col cols="12">
-            <v-btn @click="SignUp" class="emailBtn">이메일 인증하기</v-btn>
+            <v-btn @click="SignUp" class="emailBtn" style="font-size: 15px;">이메일 인증하기</v-btn>
           </v-col>
         </v-row>
         <EmailVerifyModal
