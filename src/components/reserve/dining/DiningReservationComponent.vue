@@ -23,7 +23,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td class="button-group" style="padding-top: 10px;">
+                      <td class="button-group" style="padding-top: 10px; color: black;">
                         <v-btn v-bind:color="diningId===1 ? '#7A6C5B' : ''" class="custom-button" @click="selectDining(1)">Korea</v-btn>
                             <v-btn v-bind:color="diningId===2 ? '#7A6C5B' : ''" class="custom-button" @click="selectDining(2)">China</v-btn>
                             <v-btn v-bind:color="diningId===3 ? '#7A6C5B' : ''" class="custom-button" @click="selectDining(3)">Japan</v-btn>
