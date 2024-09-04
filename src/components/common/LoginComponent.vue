@@ -21,7 +21,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import FindEmailModal from './FindEmailModal.vue'
 import FindPasswordModal from './FindPasswordModal.vue'
-import axios from 'axios'
+import axios from '@/axios'
 
 export default {
   name: 'LoginComponent',
@@ -72,7 +72,7 @@ export default {
 
     const login = async () => {
       try {
-        const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}props.loginEndpoint`, {
+        const response = await axios.post(props.loginEndpoint, {
           email: email.value,
           password: password.value,
         })
