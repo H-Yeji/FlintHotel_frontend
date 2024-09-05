@@ -120,7 +120,4 @@
     border: none;
     box-shadow: none;
   }
-  .submitbtn {
-    
-  }
   </style>
