@@ -34,17 +34,21 @@
                                         hide-default-footer>
                                         <!-- 데이터 테이블의 본문 내용 -->
                                         <template v-slot:body="{ items }">
-                                            <tr v-for="q in items" :key="q.id">
+                                            <tr v-for="q in items" :key="q.id" style="text-align: center;">
                                                 <td>{{ q.id }}</td>
-                                                <td>{{ q.title }}</td>
+                                                <td>
+                                                    <router-link
+                                                        :to="{
+                                                            name: 'EmployeeQnaDetailComponent',
+                                                            params: {id: q.id},
+                                                        }"
+                                                    >
+                                                        {{ q.title }}
+                                                    </router-link>
+                                                </td>
                                                 <td>{{ q.memberEmail }}</td>
                                                 <td>{{ formatDate(q.writeTime) }}</td>
-                                                <td>
-                                                    <v-btn @click="diningDetail(q.id)"
-                                                        style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px;">
-                                                        Detail
-                                                    </v-btn>
-                                                </td>
+                                                <td>{{ q.service }}</td>
                                             </tr>
                                         </template>
                                     </v-data-table>
@@ -87,11 +91,11 @@ export default {
             email: "",
             qnaList: [], // QnA 목록
             headers: [
-                { text: 'Id', value: 'id' },
-                { text: 'Title', value: 'title' },
-                { text: 'Email', value: 'memberEmail' },
-                { text: 'Write Time', value: 'writeTime' },
-                { text: 'Detail', value: 'detail' }
+                { title: 'Id', value: 'id', align: "center" },
+                { title: 'Title', value: 'title', align: "center" },
+                { title: 'Email', value: 'memberEmail', align: "center" },
+                { title: 'Write Time', value: 'writeTime', align: "center" },
+                { title: 'Service', value: 'service', align: "center" }
             ],
             pageSize: 10, // 페이지당 항목 수
             currentPage: 1, // 현재 페이지 번호
@@ -130,7 +134,7 @@ export default {
                 // QnA 데이터 및 전체 페이지 수 갱신
                 this.qnaList = responseData.content || [];
                 this.totalPages = responseData.totalPages || 0;
-
+                console.log(this.qnaList);  
                 this.isLoading = false; // 로딩 상태 종료
 
             } catch (e) {
