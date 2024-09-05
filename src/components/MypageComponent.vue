@@ -2,24 +2,24 @@
   <v-col cols="3" align-self="center">
     <v-row class="sidebar" style="padding-top: 250px;">
         <ul>
-          <li style="padding-bottom: 10px;padding-top: 10px;">
+          <li style="padding-bottom: 10px;">
             <v-btn class="custom-size" :to="{ path: '/mypage/dining' }"
             style="color:#69586F; font-size: 16px; ">Dining</v-btn
             >
           </li>
-          <li style="padding-bottom: 10px;padding-top: 10px;">
+          <li style="padding-bottom: 10px;">
             <v-btn class="custom-size" :to="{ path: '/mypage/room' }" style="color:#69586F; font-size: 16px;"
               >Room</v-btn
             >
           </li>
-          <li style="padding-bottom: 10px;padding-top: 10px;">
+          <li style="padding-bottom: 10px;">
             <v-btn class="custom-size" :to="{path:'/mypage/updatepassword'}"  style="color:#69586F; font-size: 16px;">Pw Change</v-btn
             >
           </li>
-          <li style="padding-bottom: 10px;padding-top: 10px;">
+          <li style="padding-bottom: 10px;">
             <v-btn class="custom-size" @click="$router.push('/mypage/qna/list')" style="color:#69586F; font-size: 16px;">Inquiry</v-btn>
           </li>
-          <li style="padding-bottom: 10px;padding-top: 10px;">
+          <li style="padding-bottom: 10px;">
             <v-btn class="custom-size" 
               :to="{path:'/mypage/delmember'}"
                style="color:#69586F; font-size: 16px; "

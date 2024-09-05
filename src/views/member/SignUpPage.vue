@@ -174,13 +174,15 @@ export default {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     overflow-y: auto;
+    color: grey;
   }
 .korFont {
   font-family: "Noto Serif KR", serif;
+  color: grey; 
 }
 .emailBtn {
   font-family: "Noto Serif KR", serif;
-  background-color: #7A6C5B;
+  background-color: grey;
   color: white;
   margin-left: 85%;
 }

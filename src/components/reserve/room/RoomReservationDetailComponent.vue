@@ -17,7 +17,7 @@
                             <v-col>
                                 <v-card class="info">
                                     <v-card-title style="font-size: 16px; padding-top:20px;">&nbsp;&nbsp;○ 기본정보</v-card-title>
-                                    <v-card-text style="padding-top: 15px; padding-left: 30px; padding-right: 30px;">
+                                    <v-card-text style="padding-top: 8px; padding-left: 30px; padding-right: 30px; padding-bottom: 20px;">
                                         {{ roomDetails[roomType].basicInfo }}
                                     </v-card-text>
                                 </v-card>
@@ -30,7 +30,7 @@
                             <v-col>
                                 <v-card class="info">
                                     <v-card-title style="font-size: 16px; padding-top:20px;">&nbsp;&nbsp;○ 편의시설</v-card-title>
-                                    <v-card-text style="padding-top: 15px; padding-left: 30px; padding-right: 30px;">
+                                    <v-card-text style="padding-top: 8px; padding-left: 30px; padding-right: 30px; padding-bottom: 20px;">
                                         {{ roomDetails[roomType].amenities }}
                                     </v-card-text>
                                 </v-card>
