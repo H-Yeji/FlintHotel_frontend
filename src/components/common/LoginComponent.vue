@@ -77,11 +77,11 @@ export default {
 
     const login = async () => {
       try {
-        const response = await axios.post(loginUrl.value, {
+          localStorage.clear(); 
+          const response = await axios.post(loginUrl.value, {
           email: email.value,
           password: password.value,
         });
-        localStorage.clear();
         const token = response.data.result[props.tokenName];
         localStorage.setItem(props.tokenName, token);
         alert(response.data.status_message);

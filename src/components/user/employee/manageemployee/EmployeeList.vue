@@ -10,7 +10,7 @@
                         <v-card-text class="cardText">
                             <!-- 검색 바 추가 -->
                             <v-row class="searchrow d-flex justify-space-between">
-                                <v-col cols="12" md="4" class="d-flex justify-start" style="margin-left:-30px;">
+                                <v-col cols="12" md="4" class="d-flex justify-start">
                                     <v-btn @click="createEmployee" color="#7A6C5B" style="font-size: 15px;" elevation="0" outlined>Add
                                         Employee</v-btn>
                                 </v-col>
@@ -80,8 +80,7 @@
                                         <v-btn
                                             :disabled="currentPage === 1"
                                             @click="previousPage"
-                                            color="primary"
-                                            style="font-size: 15px;"
+                                            style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px; margin-right: 3px;"
                                             outlined
                                         >
                                             이전 페이지
@@ -89,8 +88,7 @@
                                         <v-btn
                                             :disabled="currentPage === totalPages"
                                             @click="nextPage"
-                                            color="primary"
-                                            style="font-size: 15px;"
+                                            style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px; margin-left: 3px;"
                                             outlined
                                         >
                                             다음 페이지

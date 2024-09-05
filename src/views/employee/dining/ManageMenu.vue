@@ -10,7 +10,7 @@
                             <v-row class="searchrow d-flex justify-space-between">
                                 <!-- 메뉴 추가 버튼: 왼쪽 정렬 -->
                                 <v-col cols="12" md="3" v-if="canAccess" class="d-flex justify-start" style="margin-top:7px; margin-left:-30px;">
-                                    <v-btn @click="openCreateMenuDialog" style="background-color: #7A6C5B; color: white; font-size: 15px; margin-left: 10px;" elevation="0" outlined>Add Menu</v-btn>
+                                    <v-btn @click="openCreateMenuDialog" style="background-color: #7A6C5B; color: white; font-size: 15px; margin-left: 12%;" elevation="0" outlined>Add Menu</v-btn>
                                 </v-col>
                                 <!-- 검색 관련 요소: 오른쪽 정렬 -->
                                 <v-col cols="12" md="9" class="justify-end">
