@@ -106,7 +106,7 @@
                     <div style="padding-top:15px;">{{ formatPrice(totalPrice) }}원</div>
                 </v-col>
                 <v-col cols="auto">
-                    <v-btn @click="createReservation" class="submit-btn" style="height: 50px; width: 70%;">Submit</v-btn>
+                    <v-btn @click="createReservation" class="submit-btn" style="height: 50px;">Submit</v-btn>
                 </v-col>
             </v-row>
         </v-container>

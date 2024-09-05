@@ -10,7 +10,7 @@
                             <v-row class="searchrow d-flex justify-space-between">
                                 <!-- 메뉴 추가 버튼: 왼쪽 정렬 -->
                                 <v-col cols="12" md="3" v-if="canAccess" class="d-flex justify-start" style="margin-top:7px; margin-left:-30px;">
-                                    <v-btn @click="openCreateMenuDialog" color="#7A6C5B" style="font-size: 15px;" elevation="0" outlined>Add Menu</v-btn>
+                                    <v-btn @click="openCreateMenuDialog" style="background-color: #7A6C5B; color: white; font-size: 15px; margin-left: 10px;" elevation="0" outlined>Add Menu</v-btn>
                                 </v-col>
                                 <!-- 검색 관련 요소: 오른쪽 정렬 -->
                                 <v-col cols="12" md="9" class="justify-end">
@@ -53,7 +53,7 @@
                                     >
                                         <thead>
                                             <tr>
-                                                <th style="text-align: center; padding-left:50px;">Id</th>
+                                                <th style="text-align: center; padding-left:50px;">Menu Code</th>
                                                 <th style="text-align: center; padding-left:50px;">Menu Name</th>
                                                 <th style="text-align: center; padding-left:50px;">Menu Price</th>
                                                 <th></th>
@@ -66,7 +66,7 @@
                                                 <td class="name-column-value" style="padding-left:50px;">{{ p.menuName }}</td>
                                                 <td class="price-column-value" style="padding-left:50px;">{{ p.cost }}원</td>
                                                 <td class="col-action">
-                                                    <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px;" 
+                                                    <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px; margin-right: 5px;" 
                                                     @click="openEditMenuDialog(p)" elevation="0" outlined small>Modify</v-btn>
                                                     <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px;" 
                                                     @click="openDeleteMenuDialog(p.menuId)" elevation="0" outlined small>Delete</v-btn>
@@ -79,8 +79,7 @@
                                         <v-btn
                                             :disabled="currentPage === 1"
                                             @click="previousPage"
-                                            color="primary"
-                                            style="font-size: 15px;"
+                                            style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px; margin-right: 3px;"
                                             outlined
                                         >
                                             이전 페이지
@@ -88,8 +87,7 @@
                                         <v-btn
                                             :disabled="currentPage === totalPages"
                                             @click="nextPage"
-                                            color="primary"
-                                            style="font-size: 15px;"
+                                            style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px; margin-left: 3px;"
                                             outlined
                                         >
                                             다음 페이지
@@ -104,6 +102,7 @@
 
             <!-- 추가 모달 -->
             <AddMenuModal
+                class="modal"
                 v-model="createDialog"
                 @input="createDialog = $event"
                 :menuData="createMenuData"
@@ -112,6 +111,7 @@
 
             <!-- 수정 모달 -->
             <ModMenuModal
+                class="modal"
                 v-model="editDialog"
                 @input="editDialog = $event"
                 :menuData="editMenuData"
@@ -120,7 +120,9 @@
 
             <!-- 삭제 확인 모달 -->
             <DeleteModal
+                class="modal"
                 v-model="deleteDialog"
+                @input="deleteDialog = $event"
                 :menuId="menuIdToDelete"
                 @delete-menu="confirmDeleteMenu"
             />
@@ -402,5 +404,9 @@ export default {
 
 .emailcol {
     margin-right: -20px;
+}
+.modal {
+  padding: 20px;
+  font-family: "Noto Serif KR", serif;
 }
 </style>

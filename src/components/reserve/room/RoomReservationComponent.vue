@@ -249,6 +249,7 @@
     color: white; 
     background-color: #7A6C5B;
     transition: background-color 0.3s ease; 
+    font-family: "Noto Serif KR", serif;
   }
   .date-label {
     font-family: "Noto Serif KR", serif;

@@ -129,6 +129,7 @@
 
                         <!-- 시간 모델창 -->
                         <v-dialog
+                          class="modal"
                           v-model="timePickerVisible"
                           max-width="450"
                           style="font-family: Noto Serif KR, serif"
@@ -147,11 +148,11 @@
                             </v-card-text>
                             <v-card-actions>
                               <v-spacer></v-spacer>
-                              <v-btn color="primary" text @click="saveTime"
+                              <v-btn color="black" text @click="saveTime"
                                 >OK</v-btn
                               >
                               <v-btn
-                                color="primary"
+                                color="black"
                                 text
                                 @click="closeTimePicker"
                                 >Cancel</v-btn
@@ -387,6 +388,10 @@ body,
   transform: translate(-50%, -50%);
   border-radius: 10px;
   overflow-y: auto;
+  font-family: "Noto Serif KR", serif;
+}
+.modal {
+  padding: 20px;
   font-family: "Noto Serif KR", serif;
 }
 </style>

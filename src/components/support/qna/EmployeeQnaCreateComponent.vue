@@ -47,7 +47,7 @@
                         <v-textarea v-model="answer" outlined></v-textarea>
                       </v-col>
                     </v-row>
-                    <v-row>
+                    <!-- <v-row>
                       <v-col cols="12" md="2" class="custom-col-title">
                         <v-input>Date</v-input>
                       </v-col>
@@ -62,7 +62,7 @@
                       <v-col cols="12" md="10">
                         <v-text-field v-model="time" outlined></v-text-field>
                       </v-col>
-                    </v-row>
+                    </v-row> -->
                   </v-form>
                 </v-card-text>
               </v-card>
@@ -93,7 +93,6 @@ export default {
       date: "", // 날짜 입력
       time: "", // 시간 입력
       answer: "",
-      answerTime: "" // 날짜와 시간 합친 값
     };
   },
 
@@ -116,19 +115,22 @@ export default {
     },
     async submit() {
 
-    if (!this.date || !this.time) {
-      alert('날짜와 시간을 입력해주세요.');
-      return;
-    }
+    // if (!this.date || !this.time) {
+    //   alert('날짜와 시간을 입력해주세요.');
+    //   return;
+    // }
 
       const id = this.$route.params.id;
       try {
         // 날짜와 시간 합치기
-        this.answerTime = `${this.date}T${this.time}:00`;
+        // this.answerTime = `${this.date}T${this.time}:00`;
+        const answerTime = new Date();
+        answerTime.setHours(answerTime.getHours() + 9);
 
+        console.log(answerTime);
         const params = {
           answer: this.answer,
-          answerTime: this.answerTime
+          answerTime: answerTime
         };
         console.log("params:", params);
         const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/answer/create/${id}`, params);

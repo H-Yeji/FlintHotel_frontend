@@ -117,6 +117,8 @@
   .qna-card {
     width:80%;
     padding: 20px;
+    border: none;
+    box-shadow: none;
   }
   .submitbtn {
     

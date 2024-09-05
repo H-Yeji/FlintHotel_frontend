@@ -90,7 +90,7 @@
                           <!-- 버튼 추가 -->
                         <v-row class="justify-end">
                             <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px; font-size: 15px;" @click="DiningModify($route.params.diningReservationId)">Modify</v-btn>
-                            <v-btn style="color: white; background-color: #CFB18E; margin-top:20px; font-size: 15px;" @click="openDeleteDialog">Cancel</v-btn>
+                            <v-btn style="color: white; background-color: #CFB18E; margin-top:20px; font-size: 15px; margin-right: 15px;" @click="openDeleteDialog">Cancel</v-btn>
                         </v-row>            
                     </v-card>
                 </v-col>
@@ -257,7 +257,7 @@ export default {
     padding-left: 20px;
 }
 .leftbtn {
-    margin-right: 2px;
+    margin-right: 5px;
 }
 
 .modal {

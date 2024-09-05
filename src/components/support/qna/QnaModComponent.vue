@@ -55,7 +55,7 @@
                         <v-row class="justify-end">
                             <v-btn class="leftbtn" style="color: white;" color="#7A6C5B"
                             @click="openModiDialog">Submit</v-btn>
-                            <v-btn style="color: white;" color="#CFB18E" @click="back()">Cancel</v-btn>
+                            <v-btn style="color: white; margin-right: 10px;" color="#CFB18E" @click="back()">Cancel</v-btn>
                         </v-row>
                     </v-card-text>
                 </v-card>
@@ -63,7 +63,7 @@
         </v-row>
 
         <!-- 모달 -->
-        <v-dialog v-model="dialog" max-width="400px">
+        <v-dialog class="modal" v-model="dialog" max-width="400px">
             <v-card class="modal">
                 <v-card-title>수정을 완료하시겠습니까?</v-card-title>
                 <v-card-actions>
@@ -214,6 +214,10 @@
     color: #787878;
   }
   .leftbtn {
-    margin-right: -8px;
+    margin-right: 5px;
   }
+  .modal {
+    padding: 20px;
+    font-family: "Noto Serif KR", serif;
+    }
   </style>

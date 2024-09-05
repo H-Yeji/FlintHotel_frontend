@@ -22,7 +22,7 @@
                     </tbody>
                     <br>
                     <v-btn class="vBtn" @click="toggleEditMode" 
-                    style="color: white; background-color:#7A6C5B; margin-left:32%; font-size: 15px;">
+                    style="color: white; background-color:#7A6C5B; margin-left:30%; font-size: 15px;">
                         {{ editMode ? 'Submit' : 'Modify' }}
                     </v-btn>
                 </v-card-text>
