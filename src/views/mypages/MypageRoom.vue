@@ -80,6 +80,7 @@ export default {
       this.roomList = response.data;
       console.log("룸리스트: " , this.roomList)
     } catch (e) {
+      alert(e.response ? e.response.data.error_message : e.message) 
       console.log(e);
     }
   },

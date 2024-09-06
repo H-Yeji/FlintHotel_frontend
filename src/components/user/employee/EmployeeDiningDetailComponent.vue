@@ -166,6 +166,7 @@ export default {
                 this.comment = diningReseve.comment
                
             } catch (error) {
+                alert(error.response ? error.response.data.error_message : error.message) 
                 console.error('Error fetching dining details:', error.response ? error.response.data : error.message);
             }
         },

@@ -129,6 +129,7 @@ export default {
         this.phoneNumber = response.data.result.phoneNumber;
 
       } catch (e) {
+        alert(e.response ? e.response.data.error_message : e.message)
         console.log(e);
       }
     },
@@ -140,6 +141,7 @@ export default {
         this.diningName = response.data.result;
 
       } catch (e) {
+        alert(e.response ? e.response.data.error_message : e.message)
         console.log(e);
       }
     }

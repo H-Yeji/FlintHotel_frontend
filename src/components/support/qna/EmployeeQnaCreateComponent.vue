@@ -109,8 +109,9 @@ export default {
         this.service = response.data.result.service;
         this.title = response.data.result.title;
         this.contents = response.data.result.contents;
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        alert(error.response ? error.response.data.error_message : error.message) 
+        console.log(error);
       }
     },
     async submit() {
@@ -139,6 +140,7 @@ export default {
         // submit 성공하면 detail로 보내기
         this.$router.push(`/employee/qna/detail/${id}`);
       } catch (e) {
+        alert(e.response ? e.response.data.error_message : e.message) 
         console.log("Error:", e.response ? e.response.data : e.message);
       }
     }

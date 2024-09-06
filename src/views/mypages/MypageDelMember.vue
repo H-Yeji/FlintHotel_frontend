@@ -83,6 +83,7 @@ export default {
         localStorage.clear()
         this.$router.push({ name: "Flint" });
       } catch (e) {
+        alert(e.response ? e.response.data.error_message : e.message) 
         console.log("비어있음");
       }
     }

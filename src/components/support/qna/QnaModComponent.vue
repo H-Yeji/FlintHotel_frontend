@@ -114,6 +114,7 @@
                 if (e.response) {
                     console.error("Error Status:", e.response.status);  
                     console.error("Error Data:", e.response.data); 
+                    alert(e.response.error_message);
                 } else {
                     console.error("Error Message:", e.message);
                 }

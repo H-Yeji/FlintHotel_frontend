@@ -160,6 +160,7 @@ export default {
                 this.requestMsg = this.roomDetail.requestContents;
             } catch (e) {
                 if (e.response) {
+                    alert(e.response.error_message);
                     console.error("Error Status:", e.response.status);
                     console.error("Error Data:", e.response.data);
                 } else {

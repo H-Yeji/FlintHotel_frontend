@@ -136,6 +136,7 @@
                 alert(response.data.status_message)
                 router.push("/employee/office")
               } catch(e){
+                alert(e.response ? e.response.data.error_message : e.message) 
                     console.log(e.error_message)
               }
           }

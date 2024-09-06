@@ -168,6 +168,7 @@ export default {
                 console.log("Fetched employees:", employee.value)
                 console.log("Total items:", totalItems.value)
             } catch (error) {
+                alert(error.response ? error.response.data.error_message : error.message) 
                 console.error('Error fetching employees:', error)
             }
         }

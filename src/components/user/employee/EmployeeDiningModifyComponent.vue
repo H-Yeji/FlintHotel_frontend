@@ -143,6 +143,7 @@ export default {
                 this.comment = diningReserve.comment;
                
             } catch (error) {
+                alert(error.response ? error.response.data.error_message : error.message) 
                 console.error('Error fetching dining details:', error.response ? error.response.data : error.message);
             }
         },
@@ -170,6 +171,7 @@ export default {
                 // 수정 성공 시 detail 페이지로 이동
                 this.$router.push(`/employee/dining/detail/${id}`);
             } catch (e) {
+                alert(e.response ? e.response.data.error_message : e.message) 
                 console.log("Error:", e.response ? e.response.data : e.message);
             }
         }

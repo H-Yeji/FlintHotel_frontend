@@ -180,6 +180,7 @@
           this.answerTime = date + ' ' + time || null;
           
         } catch (e) {
+          alert(e.response ? e.response.data.error_message : e.message) 
           console.log(e);
         }
       },

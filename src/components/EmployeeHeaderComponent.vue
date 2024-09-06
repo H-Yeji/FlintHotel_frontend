@@ -212,6 +212,7 @@ export default {
             console.error(error);
           };
         } catch (error) {
+          alert(error.response ? error.response.data.error_message : error.message)
           console.log(error)
         }
       }

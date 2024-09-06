@@ -59,6 +59,7 @@ export default {
       this.memberDetail = response.data.result
       console.log(this.memberDetail)
     } catch (e) {
+      alert(e.response ? e.response.data.error_message : e.message) 
       console.log("비어있음")
     }
   },

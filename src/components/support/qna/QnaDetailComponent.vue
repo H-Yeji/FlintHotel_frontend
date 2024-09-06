@@ -139,6 +139,7 @@
 
             } catch(e) {
                 if (e.response) {
+                    alert(e.response.error_message); 
                     console.error("Error Status:", e.response.status);  
                     console.error("Error Data:", e.response.data);  
                 } else {
@@ -156,6 +157,7 @@
 
                 this.$router.push(`/mypage/qna/list`);
             } catch(e) {
+                alert(e.response ? e.response.data.error_message : e.message) 
                 console.log(e);
             } finally {
                 this.dialog = false; // 모달 닫기 

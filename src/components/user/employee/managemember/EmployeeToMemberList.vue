@@ -64,6 +64,7 @@ export default {
             this.member = response.data.result
             console.log(this.member)    
         } catch(e) {
+            alert(e.response ? e.response.data.error_message : e.message) 
             console.log(e.message);
         }
     }

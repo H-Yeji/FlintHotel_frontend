@@ -140,6 +140,7 @@ export default {
                 this.isLoading = false; // 로딩 상태 종료
 
             } catch (e) {
+                alert(e.response ? e.response.data.error_message : e.message) 
                 console.error(e.message);
                 this.isLoading = false; // 오류 발생 시에도 로딩 상태 종료
             }

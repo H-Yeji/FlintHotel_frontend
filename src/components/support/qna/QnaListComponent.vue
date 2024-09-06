@@ -81,6 +81,7 @@ export default {
           return new Date(b.writeTime) - new Date(a.writeTime);
         });
       } catch (e) {
+        alert(e.response ? e.response.data.error_message : e.message) 
         console.log("Error: ", e);
       }
     },

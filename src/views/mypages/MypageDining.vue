@@ -77,6 +77,7 @@ export default {
       );
       this.diningList = response.data.result;
     } catch (e) {
+      alert(e.response ? e.response.data.error_message : e.message) 
       console.log(e);
     }
   },

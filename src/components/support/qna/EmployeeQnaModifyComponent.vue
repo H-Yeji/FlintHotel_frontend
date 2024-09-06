@@ -140,6 +140,7 @@ export default {
         this.time = time.slice(0, 5);
         this.answer = response.data.result.answer;
       } catch (e) {
+        alert(e.response ? e.response.data.error_message : e.message) 
         console.log(e);
       }
     },
@@ -165,6 +166,7 @@ export default {
         // submit 성공하면 detail로 보내기
         this.$router.push(`/employee/qna/detail/${id}`);
       } catch (e) {
+        alert(e.response ? e.response.data.error_message : e.message) 
         console.log("Error:", e.response ? e.response.data : e.message);
       }
     },
