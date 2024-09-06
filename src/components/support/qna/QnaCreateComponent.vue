@@ -30,7 +30,7 @@
                                 required
                                 ></v-textarea>  
                         </v-form>
-                        <v-btn class="submitbtn" @click="submit()" style="color: white;" color="#7A6C5B" block>Submit</v-btn>
+                        <v-btn class="submitbtn" @click="submit()" style="color: white; font-size: 15px;" color="#7A6C5B" block>Submit</v-btn>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -42,7 +42,7 @@
   
   <script>
   import QnaView from '@/views/QnaView.vue';
-  import axios from '@/axios';
+  import axios from 'axios';
   export default {
     components: {
         QnaView
@@ -67,7 +67,7 @@
                     contents: this.contents
                 }
                 console.log("params임: ", params);
-                const response = await axios.post(`/mypage/qna/create`, params);
+                const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/mypage/qna/create`, params);
                 console.log(response);
 
                 // submit 성공하면 list로 보내기
@@ -99,6 +99,7 @@
     text-align: center;
   }
   .qna-container {
+    font-family: "Noto Serif KR", serif;
     background-color: white;
     position: absolute;
     width: 90%;
@@ -116,8 +117,7 @@
   .qna-card {
     width:80%;
     padding: 20px;
-  }
-  .submitbtn {
-    left: -30px;
+    border: none;
+    box-shadow: none;
   }
   </style>

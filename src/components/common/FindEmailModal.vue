@@ -1,7 +1,7 @@
 <template>
-  <v-dialog v-model="localDialog" max-width="500px">
+  <v-dialog class="modal" v-model="localDialog" max-width="500px">
     <v-card>
-      <v-card-title class="text-h5 text-center">
+      <v-card-title class="text-h5 text-center" style="font-family: Noto Serif KR; color: grey;">
         이메일 찾기
       </v-card-title>
       <v-card-text>
@@ -25,8 +25,8 @@
             required
           ></v-text-field>
           <div style="display: flex; justify-content: center;">
-            <v-btn type="submit" class="findButton" style="width: 160px;">이메일 찾기</v-btn>
-            <v-btn class="closeButton" @click="closeModal" style="width: 160px;">닫기</v-btn>
+            <v-btn type="submit" class="findButton" style="width: 150px; font-size: 15px; margin-right: 3px;">이메일 찾기</v-btn>
+            <v-btn class="closeButton" @click="closeModal" style="width: 150px; font-size: 15px; margin-left: 3px;">닫기</v-btn>
           </div>
         </v-form>
       </v-card-text>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import axios from '@/axios'
+import axios from 'axios'
 
 export default {
 name: 'FindEmailModal',
@@ -88,8 +88,11 @@ methods: {
 </script>
 
 <style scoped>
+.modal {
+  font-family: "Noto Serif KR";
+}
 .findButton{
-  background: #8F7598;
+  background: grey;
   color: white;
   font-family: "Noto Serif KR";
   font-size: 14px;
@@ -97,7 +100,7 @@ methods: {
 
 .closeButton{
   background: white;
-  color:#8F7598;
+  color:grey;
   font-family: "Noto Serif KR";
   font-size: 14px;
 }

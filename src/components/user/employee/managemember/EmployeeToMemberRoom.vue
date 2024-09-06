@@ -17,7 +17,7 @@
                                             <v-text-field class="tf" v-model="email"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="3" class="search">
-                                            <v-btn @click="searchMember()" style="color: white;"
+                                            <v-btn @click="searchMember()" style="color: white; font-size: 15px;"
                                                 color="#7A6C5B">Search</v-btn>
                                         </v-col>
                                     </v-row>
@@ -26,11 +26,11 @@
                             <br>
                             <v-row class="justify-center">
                                 <v-col cols="12">
-                                    <v-data-table :header="headers" :items="roomReservations" class="elevation-1"
-                                        item-key="id" :style="{ maxHeight: '1000px', overflowY: 'auto'}">
-                                        <template v-slot:header>
-
-                                        </template>
+                                    <v-data-table 
+                                        :header="headers" 
+                                        :items="roomReservations" 
+                                        class="elevation-1" 
+                                        item-key="id" >
                                         <template v-slot:body="{ items }">
                                             <tr v-for="room in items" :key="room.id">
                                                 <td>{{ room.id }}</td>
@@ -56,7 +56,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -67,9 +67,10 @@ export default {
             email: "",
             roomReservations: [],
             headers: [
-                { title: 'Id', key: 'id', align: 'end' },
-                { title: 'CheckIn Date', key: 'checkInDate', align: 'end' },
-                { title: 'CheckOut Date', key: 'checkOutDate', align: 'end' },
+                { text: 'Id', value: 'id'},
+                { text: 'CheckIn Date', value: 'checkInDate'},
+                { text: 'CheckOut Date', value: 'checkOutDate'},
+                { text: 'Detail'}
             ],
         };
     },
@@ -207,7 +208,4 @@ export default {
     margin-right: -20px;
 }
 
-.v-data-table tr, .v-data-table td {
-    text-align: center;
-  }
 </style>

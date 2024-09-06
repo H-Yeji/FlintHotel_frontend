@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import axios from '@/axios'
+  import axios from 'axios'
   import loginImage from '@/assets/image.png'
   import { useRouter } from 'vue-router'
   import { ref } from 'vue'
@@ -42,7 +42,7 @@
   
       const login = async () => {
         try {
-          const response = await axios.post(`/member/login`, {
+          const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/member/login`, {
             email: email.value,
             password: password.value
           })

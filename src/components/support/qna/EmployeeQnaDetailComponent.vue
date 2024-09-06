@@ -97,7 +97,7 @@
                   <v-btn
                     v-if="!answer || answer === '답변이 없습니다. 답변을 달아주세요. '"
                     class="center"
-                    style="color: white; width: 600px; margin-right: 50px"
+                    style="color: white; width: 600px; margin-right: 50px; font-size: 15px;"
                     color="#7A6C5B"
                     @click="qnaCreate($route.params.id)"
                   >
@@ -107,18 +107,18 @@
                   <template v-else>
                     <v-btn
                       class="leftbtn"
-                      style="color: white;"
+                      style="color: white; font-size: 15px;"
                       color="#7A6C5B"
                       @click="qnaModify($route.params.id)"
                     >
                       Modify
                     </v-btn>
                     <v-btn
-                      style="color: white;"
+                      style="color: white; font-size: 15px; margin-right: 10px;"
                       color="#CFB18E"
-                      @click="qnaDelete"
+                      @click="openModal"
                     >
-                      Delete
+                      Delete Anawer
                     </v-btn>
                   </template>
                 </v-row>
@@ -126,13 +126,25 @@
             </v-card>
           </v-col>
         </v-row>
+
+        <!-- 모달 -->
+        <v-dialog class="modal" v-model="dialog" max-width="400px">
+            <v-card class="modal">
+                <v-card-title>답변을 삭제하시겠습니까?</v-card-title>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn class="leftbtn" color="black" @click="qnaDelete">Yes</v-btn>
+                    <v-btn color="black" @click="cancelDelete">No</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
       </v-container>
     </div>
   </template>
   
   <script>
   import EmployeeView from '@/views/EmployeeView.vue';
-  import axios from '@/axios';
+  import axios from 'axios';
   
   export default {
     components: {
@@ -145,7 +157,7 @@
         contents: "",
         answer: "",
         answerTime: "",
-        
+        dialog: false,
       };
     },
   
@@ -157,7 +169,7 @@
       async fetchQnaDetail() {
         try {
           const id = this.$route.params.id;
-          const response = await axios.get(`/employee/qna/detail/${id}`);
+          const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/detail/${id}`);
           console.log(response.data);
   
           this.service = response.data.result.service;
@@ -177,23 +189,33 @@
           path: `/employee/qna/answer/create/${id}`
         });
       },
+      openModal() {
+        this.dialog = true;
+      }, 
       async qnaDelete() {
         try {
             const id = this.$route.params.id;
-            const response = await axios.post(`/employee/qna/answer/delete/${id}`);
+            const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/answer/delete/${id}`);
             console.log(response.data);
 
+            this.dialog = false;
             // 삭제 후 QnA 리스트 페이지로 이동
             this.$router.push('/employee/qna/list');  
         } catch (e) {
             console.error(e);
-        }
-    },
-    async qnaModify(id) {
-        this.$router.push({
-            path: `/employee/qna/answer/update/${id}`
-        });
-    }
+        } finally {
+            this.dialog = false; // 모달 닫기 
+            alert("답변이 삭제되었습니다.");
+        } 
+      },
+      cancelDelete() {
+        this.dialog = false;
+      },
+      async qnaModify(id) {
+          this.$router.push({
+              path: `/employee/qna/answer/update/${id}`
+          });
+      }
 
     }
   }
@@ -244,7 +266,11 @@
     color: #787878;
   }
   .leftbtn {
-    margin-right: -8px;
+    margin-right: 5px;
+  }
+  .modal {
+    padding: 20px;
+    font-family: "Noto Serif KR", serif;
   }
   </style>
   

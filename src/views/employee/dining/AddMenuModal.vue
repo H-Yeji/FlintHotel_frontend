@@ -7,9 +7,9 @@
                     <v-text-field v-model="localMenuData.menuName" label="메뉴명" class="menuName" required></v-text-field>
                     <v-text-field v-model="localMenuData.cost" label="가격" class="menuPrice" :min="0" type="number" required></v-text-field>
                     <v-card-actions>
-                        <v-row style="margin-left:30px;">
-                            <v-btn class="submitButton" type="submit" style="width:90px">Submit</v-btn>
-                            <v-btn class="cancelButton" @click="closeDialog" style="width:90px">Cancel</v-btn>
+                        <v-row style="margin-left:23%;">
+                            <v-btn class="submitButton" type="submit" style="width:90px; background-color: #7A6C5B;">Submit</v-btn>
+                            <v-btn class="cancelButton" @click="closeDialog" style="width:90px; background-color: #7A6C5B;">Cancel</v-btn>
                         </v-row>
                     </v-card-actions>
                 </v-form>

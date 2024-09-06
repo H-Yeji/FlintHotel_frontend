@@ -10,7 +10,7 @@
                             <v-row class="searchrow d-flex justify-space-between">
                                 <!-- 메뉴 추가 버튼: 왼쪽 정렬 -->
                                 <v-col cols="12" md="3" v-if="canAccess" class="d-flex justify-start" style="margin-top:7px; margin-left:-30px;">
-                                    <v-btn @click="openCreateMenuDialog" color="#7A6C5B" elevation="0" outlined>Add Menu</v-btn>
+                                    <v-btn @click="openCreateMenuDialog" style="background-color: #7A6C5B; color: white; font-size: 15px; margin-left: 12%;" elevation="0" outlined>Add Menu</v-btn>
                                 </v-col>
                                 <!-- 검색 관련 요소: 오른쪽 정렬 -->
                                 <v-col cols="12" md="9" class="justify-end">
@@ -37,7 +37,7 @@
                                             </v-text-field>
                                         </v-col>
                                         <v-col cols="auto">
-                                            <v-btn type="submit" style="background-color:#DCC8B0; color:white;" elevation="0" outlined>Search</v-btn>
+                                            <v-btn type="submit" style="background-color:#DCC8B0; color:white; font-size: 15px;" elevation="0" outlined>Search</v-btn>
                                         </v-col>
                                     </v-form>
                                 </v-col>
@@ -53,7 +53,7 @@
                                     >
                                         <thead>
                                             <tr>
-                                                <th style="text-align: center; padding-left:50px;">Id</th>
+                                                <th style="text-align: center; padding-left:50px;">Menu Code</th>
                                                 <th style="text-align: center; padding-left:50px;">Menu Name</th>
                                                 <th style="text-align: center; padding-left:50px;">Menu Price</th>
                                                 <th></th>
@@ -66,9 +66,9 @@
                                                 <td class="name-column-value" style="padding-left:50px;">{{ p.menuName }}</td>
                                                 <td class="price-column-value" style="padding-left:50px;">{{ p.cost }}원</td>
                                                 <td class="col-action">
-                                                    <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B;" 
+                                                    <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px; margin-right: 5px;" 
                                                     @click="openEditMenuDialog(p)" elevation="0" outlined small>Modify</v-btn>
-                                                    <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B;" 
+                                                    <v-btn style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px;" 
                                                     @click="openDeleteMenuDialog(p.menuId)" elevation="0" outlined small>Delete</v-btn>
                                                 </td>
                                             </tr>
@@ -79,7 +79,7 @@
                                         <v-btn
                                             :disabled="currentPage === 1"
                                             @click="previousPage"
-                                            color="primary"
+                                            style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px; margin-right: 3px;"
                                             outlined
                                         >
                                             이전 페이지
@@ -87,7 +87,7 @@
                                         <v-btn
                                             :disabled="currentPage === totalPages"
                                             @click="nextPage"
-                                            color="primary"
+                                            style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px; margin-left: 3px;"
                                             outlined
                                         >
                                             다음 페이지
@@ -102,6 +102,7 @@
 
             <!-- 추가 모달 -->
             <AddMenuModal
+                class="modal"
                 v-model="createDialog"
                 @input="createDialog = $event"
                 :menuData="createMenuData"
@@ -110,6 +111,7 @@
 
             <!-- 수정 모달 -->
             <ModMenuModal
+                class="modal"
                 v-model="editDialog"
                 @input="editDialog = $event"
                 :menuData="editMenuData"
@@ -118,7 +120,9 @@
 
             <!-- 삭제 확인 모달 -->
             <DeleteModal
+                class="modal"
                 v-model="deleteDialog"
+                @input="deleteDialog = $event"
                 :menuId="menuIdToDelete"
                 @delete-menu="confirmDeleteMenu"
             />
@@ -128,7 +132,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue'
-import axios from '@/axios'
+import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'vue-router'
 import ModMenuModal from '@/views/employee/dining/ModMenuModal.vue'
@@ -203,7 +207,7 @@ export default {
         },
         async fetchMenus() {
             try {
-                const response = await axios.get(`/employee/dining/list`, {
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/dining/list`, {
                     params: {
                         department: this.department,
                         searchType: this.searchType,
@@ -248,7 +252,7 @@ export default {
         },
         async confirmCreateMenu(menuData) {
             try {
-                await axios.post(`/employee/dining/addmenu`, menuData)
+                await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/dining/addmenu`, menuData)
                 this.initialize()
                 this.closeCreateMenuDialog()
             } catch (error) {
@@ -264,7 +268,7 @@ export default {
         },
         async confirmEditMenu(menuData) {
             try {
-                await axios.patch(`/employee/dining/modmenu/${menuData.menuId}`, {
+                await axios.patch(`${process.env.VUE_APP_API_BASE_URL}/employee/dining/modmenu/${menuData.menuId}`, {
                     cost: parseInt(menuData.cost)
                 })
                 this.initialize()
@@ -282,7 +286,7 @@ export default {
         },
         async confirmDeleteMenu(menuId) {
             try {
-                await axios.delete(`/employee/dining/delmenu/${menuId}`)
+                await axios.delete(`${process.env.VUE_APP_API_BASE_URL}/employee/dining/delmenu/${menuId}`)
                 this.menuList = this.menuList.filter(p => p.menuId !== menuId)
                 this.closeDeleteMenuDialog()
             } catch (error) {
@@ -400,5 +404,9 @@ export default {
 
 .emailcol {
     margin-right: -20px;
+}
+.modal {
+  padding: 20px;
+  font-family: "Noto Serif KR", serif;
 }
 </style>

@@ -87,7 +87,7 @@
 
 <script>
 import DiningView from '@/views/DiningView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
   components: {
@@ -121,7 +121,7 @@ export default {
       const headers = { Authorization: `Bearer ${token}` };
 
       try {
-        const response = await axios.get(`/member/detail`, { headers });
+        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/member/detail`, { headers });
         console.log(response.data);
 
         this.name = response.data.result.lastName + response.data.result.firstName;
@@ -134,7 +134,7 @@ export default {
     },
     async dining() {
       try {
-        const response = await axios.get(`/dining/${this.diningId}`);
+        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/dining/${this.diningId}`);
         console.log('Dining response:', response);
 
         this.diningName = response.data.result;

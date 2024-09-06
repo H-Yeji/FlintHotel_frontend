@@ -89,8 +89,8 @@
                         </v-card-text>
                           <!-- 버튼 추가 -->
                         <v-row class="justify-end">
-                            <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px;" @click="DiningModify($route.params.diningReservationId)">Modify</v-btn>
-                            <v-btn style="color: white; background-color: #CFB18E; margin-top:20px;" @click="openDeleteDialog">Cancel</v-btn>
+                            <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px; font-size: 15px;" @click="DiningModify($route.params.diningReservationId)">Modify</v-btn>
+                            <v-btn style="color: white; background-color: #CFB18E; margin-top:20px; font-size: 15px; margin-right: 15px;" @click="openDeleteDialog">Cancel</v-btn>
                         </v-row>            
                     </v-card>
                 </v-col>
@@ -113,7 +113,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -175,7 +175,7 @@ export default {
         async DiningCancel(){
             try {
                 const id = this.$route.params.diningReservationId;
-                await axios.get(`/employee/dining/cancel_reserve_dining/${id}`);
+                await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/dining/cancel_reserve_dining/${id}`);
 
                 this.$router.push(`/employee/dining`);
             } catch(e) {
@@ -257,7 +257,7 @@ export default {
     padding-left: 20px;
 }
 .leftbtn {
-    margin-right: 2px;
+    margin-right: 5px;
 }
 
 .modal {

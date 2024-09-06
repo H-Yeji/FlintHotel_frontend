@@ -37,7 +37,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -55,9 +55,17 @@ export default {
         }
     },
     async created() {
-        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/memberlist`);
-        this.member = response.data.result
-        console.log(this.member)
+        try {
+            console.log(process.env.VUE_APP_API_BASE_URL);
+            const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/memberlist`);
+
+            console.log("목록: ", response.data.result);
+
+            this.member = response.data.result
+            console.log(this.member)    
+        } catch(e) {
+            console.log(e.message);
+        }
     }
 
 };

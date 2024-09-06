@@ -68,7 +68,7 @@
         </v-row>
         <v-row>
           <v-col cols="12">
-            <v-btn @click="SignUp" class="emailBtn">이메일 인증하기</v-btn>
+            <v-btn @click="SignUp" class="emailBtn" style="font-size: 15px;">이메일 인증하기</v-btn>
           </v-col>
         </v-row>
         <EmailVerifyModal
@@ -82,7 +82,8 @@
 </template>
 
 <script>
-import axios from '@/axios'
+import axios from 'axios'
+// import axios from 'axios'
 import { ref } from 'vue'
 import EmailVerifyModal from './EmailVerifyModal.vue'
 import FlintView from '@/views/FlintView.vue';
@@ -119,7 +120,7 @@ export default {
           phoneNumber: phoneNumber.value,
           nation: nation.value,
         }
-        await axios.post(`/member/signup`, signUpData)
+        await axios.post(`${process.env.VUE_APP_API_BASE_URL}/member/signup`, signUpData)
         alert("회원님의 이메일로 인증 코드가 전송되었습니다. 인증 코드를 입력하시면 회원 가입이 완료됩니다!")
         emailVerify.value = true 
       } catch (error) {
@@ -173,13 +174,15 @@ export default {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     overflow-y: auto;
+    color: grey;
   }
 .korFont {
   font-family: "Noto Serif KR", serif;
+  color: grey; 
 }
 .emailBtn {
   font-family: "Noto Serif KR", serif;
-  background-color: #7A6C5B;
+  background-color: grey;
   color: white;
   margin-left: 85%;
 }

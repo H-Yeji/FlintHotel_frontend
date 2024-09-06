@@ -7,8 +7,8 @@
           <MypageComponent />
           <v-col cols="9" justify="center">
             <v-card-title class="custom-title">
-              <div style="padding-top: 50px;">
-                <v-text style="font-size : 50px;">My Infomation</v-text><br><br>
+              <div style="padding-top: 45px;">
+                <v-text style="font-size : 38px;">My Infomation</v-text><br><br>
                 <v-divider class="custom-divider" style=" width: 700px ;"></v-divider>
                 <br>
               </div> 

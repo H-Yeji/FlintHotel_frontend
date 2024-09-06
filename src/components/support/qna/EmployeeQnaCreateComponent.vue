@@ -47,7 +47,7 @@
                         <v-textarea v-model="answer" outlined></v-textarea>
                       </v-col>
                     </v-row>
-                    <v-row>
+                    <!-- <v-row>
                       <v-col cols="12" md="2" class="custom-col-title">
                         <v-input>Date</v-input>
                       </v-col>
@@ -62,12 +62,12 @@
                       <v-col cols="12" md="10">
                         <v-text-field v-model="time" outlined></v-text-field>
                       </v-col>
-                    </v-row>
+                    </v-row> -->
                   </v-form>
                 </v-card-text>
               </v-card>
               <v-row class="justify-end" style="padding-top: 55px;">
-                <v-btn class="center" style="color: white; width:600px; margin-right:50px" color="#7A6C5B" @click="submit">Submit</v-btn>
+                <v-btn class="center" style="color: white; width:600px; margin-right:50px; font-size: 15px;" color="#7A6C5B" @click="submit">Submit</v-btn>
               </v-row>
             </v-card-text>
           </v-card>
@@ -79,7 +79,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
   components: {
@@ -93,7 +93,6 @@ export default {
       date: "", // 날짜 입력
       time: "", // 시간 입력
       answer: "",
-      answerTime: "" // 날짜와 시간 합친 값
     };
   },
 
@@ -104,7 +103,7 @@ export default {
     async fetchQnaDetail() {
       try {
         const id = this.$route.params.id;
-        const response = await axios.get(`/employee/qna/detail/${id}`);
+        const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/detail/${id}`);
         console.log(response.data);
 
         this.service = response.data.result.service;
@@ -116,22 +115,25 @@ export default {
     },
     async submit() {
 
-    if (!this.date || !this.time) {
-      alert('날짜와 시간을 입력해주세요.');
-      return;
-    }
+    // if (!this.date || !this.time) {
+    //   alert('날짜와 시간을 입력해주세요.');
+    //   return;
+    // }
 
       const id = this.$route.params.id;
       try {
         // 날짜와 시간 합치기
-        this.answerTime = `${this.date}T${this.time}:00`;
+        // this.answerTime = `${this.date}T${this.time}:00`;
+        const answerTime = new Date();
+        answerTime.setHours(answerTime.getHours() + 9);
 
+        console.log(answerTime);
         const params = {
           answer: this.answer,
-          answerTime: this.answerTime
+          answerTime: answerTime
         };
         console.log("params:", params);
-        const response = await axios.post(`/employee/qna/answer/create/${id}`, params);
+        const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/qna/answer/create/${id}`, params);
         console.log("response:", response);
 
         // submit 성공하면 detail로 보내기
@@ -153,6 +155,7 @@ export default {
   text-align: center;
 }
 .qna-container {
+  font-family: "Noto Serif KR", serif;
   background-color: white;
   position: absolute;
   width: 90%;
@@ -169,6 +172,8 @@ export default {
 .qna-card {
   width: 80%;
   padding: 20px;
+  border: none;
+  box-shadow: none;
 }
 .custom-col-service {
   padding-left: 50px;

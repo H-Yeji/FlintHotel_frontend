@@ -17,8 +17,8 @@
                                             <v-text-field class="tf" v-model="email"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="3" class="search">
-                                            <v-btn @click="searchMember()" style="color: white;"
-                                                color="#7A6C5B">Search</v-btn>
+                                            <v-btn @click="searchMember()" style="color: white; font-size: 15px; background-color: #7A6C5B"
+                                                >Search</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-col>
@@ -35,7 +35,7 @@
                                                     <td>{{ formatTime(dr.reservationTime) }}</td>
                                                     <td>
                                                         <v-btn @click="diningDetail(dr.diningReservationId)"
-                                                            style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B;">Detail</v-btn>
+                                                            style="background-color:white; color:#7A6C5B; border: 1px solid #7A6C5B; font-size: 15px;">Detail</v-btn>
                                                     </td>
                                                 </tr>
                                             </template>
@@ -53,7 +53,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -64,7 +64,7 @@ export default {
             email: "",
             diningReservations: [],
             headers: [
-                { text: 'Id', value: 'diningReservationId', align: 'center' },
+                { text: 'Id', value: 'diningReservationId', align: 'end' },
                 { text: 'Reserve Date', value: 'reservationDate', align: 'center' },
                 { text: 'Reserve Time', value: 'reservationTime', align: 'center' },
             ],

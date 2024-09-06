@@ -7,8 +7,8 @@
           <MypageComponent />
           <v-col cols="9" justify="center">
             <v-card-title class="custom-title">
-              <v-text style="font-size : 45px;">Password Change</v-text>
-              <p>고객님의 정보를 언제든지 변경할 수 있습니다.</p>
+              <v-text style="font-size : 38px;">Password Change</v-text>
+              <p style="font-size: 18px;">고객님의 정보를 언제든지 변경할 수 있습니다.</p>
               <v-col>
                 <v-card>
                   <v-card-text>
@@ -55,7 +55,7 @@
                 </v-card>
                 <br />
                 <v-row class="justify-end text-align: right" style="padding-right: 20px; ">
-                  <v-btn @click="passwordUpdate" style="color:#69586F; border: 0.5px solid #69586F;">
+                  <v-btn @click="passwordUpdate" style="color:#69586F; border: 0.5px solid #69586F; font-size: 15px;">
                       CHANGE
                   </v-btn>
               </v-row>

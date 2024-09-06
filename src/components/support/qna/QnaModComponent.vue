@@ -55,7 +55,7 @@
                         <v-row class="justify-end">
                             <v-btn class="leftbtn" style="color: white;" color="#7A6C5B"
                             @click="openModiDialog">Submit</v-btn>
-                            <v-btn style="color: white;" color="#CFB18E" @click="back()">Cancel</v-btn>
+                            <v-btn style="color: white; margin-right: 10px;" color="#CFB18E" @click="back()">Cancel</v-btn>
                         </v-row>
                     </v-card-text>
                 </v-card>
@@ -63,7 +63,7 @@
         </v-row>
 
         <!-- 모달 -->
-        <v-dialog v-model="dialog" max-width="400px">
+        <v-dialog class="modal" v-model="dialog" max-width="400px">
             <v-card class="modal">
                 <v-card-title>수정을 완료하시겠습니까?</v-card-title>
                 <v-card-actions>
@@ -78,7 +78,7 @@
   
   <script>
   import QnaView from '@/views/QnaView.vue';
-  import axios from '@/axios';
+  import axios from 'axios';
   export default {
     components: {
         QnaView
@@ -103,7 +103,7 @@
                 const token = localStorage.getItem('membertoken');
                 const headers = {Authorization: `Bearer ${token}`};
 
-                const response = await axios.get(`/mypage/qna/detail/${qnaId}`, {headers});
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/mypage/qna/detail/${qnaId}`, {headers});
                 console.log(response);
 
                 this.selectedSerivce = response.data.result.service;
@@ -132,7 +132,7 @@
                 }
                 console.log("params임: ", params);
 
-                const response = await axios.post(`/mypage/qna/update/${qnaId}`, params);
+                const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/mypage/qna/update/${qnaId}`, params);
                 console.log(response);
 
                 setTimeout(() => {
@@ -214,6 +214,10 @@
     color: #787878;
   }
   .leftbtn {
-    margin-right: -8px;
+    margin-right: 5px;
   }
+  .modal {
+    padding: 20px;
+    font-family: "Noto Serif KR", serif;
+    }
   </style>

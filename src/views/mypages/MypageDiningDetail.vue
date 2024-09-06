@@ -63,7 +63,7 @@
                                     <v-row>
                                         <v-col>
                                             <v-row class="justify-end text-align: right" style="padding-right: 20px;">
-                                                <v-btn @click="openDeleteDialog" style="color:#69586F; border: 0.5px solid #69586F;">
+                                                <v-btn @click="openDeleteDialog" style="color:#69586F; border: 0.5px solid #69586F; font-size: 15px;">
                                                     DELETE
                                                 </v-btn>
                                             </v-row>
@@ -94,7 +94,7 @@
 <script>
 import QnaView from '../QnaView.vue';
 import MypageComponent from '@/components/MypageComponent.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -122,7 +122,7 @@ export default {
         async fetchReserveDetail(reserveId) {
             try {
                 // qna detail
-                const response = await axios.get(`/reserve/dining/detail/${reserveId}`);
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/reserve/dining/detail/${reserveId}`);
                 this.diningDetail = response.data.result
                 console.log(this.diningDetail)
                 this.diningName = this.diningDetail.diningName
@@ -145,7 +145,7 @@ export default {
         },
         async deleteReservation() {
             try {
-                const response = await axios.get(`/reserve/dining/delete/${this.reserveId}`);
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/reserve/dining/delete/${this.reserveId}`);
                 console.log(response.data);
                 
                 this.$router.push(`/mypage/dining`);

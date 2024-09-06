@@ -100,10 +100,10 @@
                                 </v-col>
                             </v-row>
                             <v-row class="justify-end">
-                                <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px;"
+                                <v-btn class="leftbtn" style="color: white; background-color: #7A6C5B; margin-top: 20px; font-size: 15px;"
                                 @click="$router.push({ name: 'EmployeeToMemberRoomModDetail', params: { id: this.$route.params.id } })"
                                 >Modify</v-btn>
-                                <v-btn class="leftbtn" style="color: white; background-color: #CFB18E; margin-top:20px;"
+                                <v-btn class="leftbtn" style="color: white; background-color: #CFB18E; margin-top:20px; font-size: 15px;"
                                  @click="openDeleteDialog"
                                 >Delete</v-btn>
                             </v-row>
@@ -129,7 +129,7 @@
 
 <script>
 import EmployeeView from '@/views/EmployeeView.vue';
-import axios from '@/axios';
+import axios from 'axios';
 
 export default {
     components: {
@@ -157,7 +157,7 @@ export default {
     methods: {
         async fetchRoomReserveId(reserveId) {
             try {
-                const response = await axios.get(`/employee/room/reserve/${reserveId}`);
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/room/reserve/${reserveId}`);
                 const reservationDetail = response.data;
 
                 this.roomType = reservationDetail.roomType
@@ -187,7 +187,7 @@ export default {
         async deleteReservation() {
             try {
                 const reserveId = this.$route.params.id;
-                await axios.post(`/employee/room/cancel_reserve_room/${reserveId}`);
+                await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/room/cancel_reserve_room/${reserveId}`);
 
                 this.$router.push(`/employee/room`);
             } catch(e) {

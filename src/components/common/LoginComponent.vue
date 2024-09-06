@@ -11,17 +11,17 @@
         <a v-if="showJoinLink" :href="joinLink" class="link">JOIN</a>
       </div>
     </div>
-    <FindEmailModal v-model="dialog1" @close="closeFindEmailModal" :findEmailEndpoint="findEmailEndpoint" />
-    <FindPasswordModal v-model="dialog2" @close="closeFindPasswordModal" :findPasswordEndpoint="findPasswordEndpoint" />
+    <FindEmailModal v-model="dialog1" @close="closeFindEmailModal" :findEmailEndpoint="findEmailUrl" />
+    <FindPasswordModal v-model="dialog2" @close="closeFindPasswordModal" :findPasswordEndpoint="findPasswordUrl" />
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import FindEmailModal from './FindEmailModal.vue'
-import FindPasswordModal from './FindPasswordModal.vue'
-import axios from '@/axios'
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import FindEmailModal from './FindEmailModal.vue';
+import FindPasswordModal from './FindPasswordModal.vue';
+import axios from 'axios';
 
 export default {
   name: 'LoginComponent',
@@ -64,44 +64,48 @@ export default {
     }
   },
   setup(props) {
-    const email = ref('')
-    const password = ref('')
-    const dialog1 = ref(false)
-    const dialog2 = ref(false)
-    const router = useRouter()
+    const email = ref('');
+    const password = ref('');
+    const dialog1 = ref(false);
+    const dialog2 = ref(false);
+    const router = useRouter();
+
+    // 경로를 미리 계산
+    const findEmailUrl = computed(() => `${process.env.VUE_APP_API_BASE_URL}${props.findEmailEndpoint}`);
+    const findPasswordUrl = computed(() => `${process.env.VUE_APP_API_BASE_URL}${props.findPasswordEndpoint}`);
+    const loginUrl = computed(() => `${process.env.VUE_APP_API_BASE_URL}${props.loginEndpoint}`);
 
     const login = async () => {
       try {
-        const response = await axios.post(props.loginEndpoint, {
+          localStorage.clear(); 
+          const response = await axios.post(loginUrl.value, {
           email: email.value,
           password: password.value,
-        })
-        localStorage.clear();
-        const token = response.data.result[props.tokenName]
-        localStorage.setItem(props.tokenName, token)
-        alert(response.data.status_message)
-        // 로그인 성공 시 설정된 경로로 리다이렉트
-        router.push(props.redirectPath)
+        });
+        const token = response.data.result[props.tokenName];
+        localStorage.setItem(props.tokenName, token);
+        alert(response.data.status_message);
+        router.push(props.redirectPath);
       } catch (error) {
-        alert(error.response ? error.response.data.error_message : error.message)
+        alert(error.response ? error.response.data.error_message : error.message);
       }
-    }
+    };
 
     const openFindEmailModal = () => {
-      dialog1.value = true
-    }
+      dialog1.value = true;
+    };
 
     const closeFindEmailModal = () => {
-      dialog1.value = false
-    }
+      dialog1.value = false;
+    };
 
     const openFindPasswordModal = () => {
-      dialog2.value = true
-    }
+      dialog2.value = true;
+    };
 
     const closeFindPasswordModal = () => {
-      dialog2.value = false
-    }
+      dialog2.value = false;
+    };
 
     return {
       email,
@@ -113,10 +117,13 @@ export default {
       closeFindEmailModal,
       openFindPasswordModal,
       closeFindPasswordModal,
-    }
+      findEmailUrl, 
+      findPasswordUrl,
+    };
   },
-}
+};
 </script>
+
 
 <style scoped>
 /* 기존 스타일 유지 */

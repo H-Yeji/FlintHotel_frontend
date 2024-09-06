@@ -23,11 +23,11 @@
       :style="{ transition: 'transform 0.3s ease-in-out', transform: isScrolled ? 'translateY(-100%)' : 'translateY(0)' }">
       <v-container>
         <v-row justify="center" style="padding-right: 30px;">
-          <v-btn text style="color:#FFFFFF">INTRODUCE</v-btn>
-          <v-btn text style="color:#FFFFFF" @click="openReservationDialog">RESERVATION</v-btn>
+          <v-btn text style="color:#FFFFFF; font-size: 16px;">INTRODUCE</v-btn>
+          <v-btn text style="color:#FFFFFF; font-size: 16px;" @click="openReservationDialog">RESERVATION</v-btn>
           <v-btn text style="font-size: 40px; color:#FFFFFF" @click="$router.push('/')">FLINT HOTEL</v-btn>
-          <v-btn text style="color:#FFFFFF">DINING</v-btn>
-          <v-btn text style="color:#FFFFFF">ROOM</v-btn>
+          <v-btn text style="color:#FFFFFF; font-size: 16px;">DINING</v-btn>
+          <v-btn text style="color:#FFFFFF; font-size: 16px;">ROOM</v-btn>
         </v-row>
 
         <!-- reservation 클릭 후 > 모달창 -->
@@ -38,12 +38,12 @@
               <v-row class="button-row" justify="center">
                 <v-col cols="6" md="6" class="d-flex justify-center">
                   <v-btn class="custom-btn" size="large" style="color: black; background-color: white; border-color: #D5DCEA; border-width: 3px;
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none;"
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none; font-size: 15px;"
                     @click="RoomReservationBtn">Room</v-btn>
                 </v-col>
                 <v-col cols="6" md="6" class="d-flex justify-center">
                   <v-btn class="custom-btn" size="large" style="color: black; background-color: white; border-color: #D5DCEA; border-width: 3px;
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none;"
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; box-shadow: none; font-size: 15px;"
                     @click="DiningReservationBtn">Dining</v-btn>
                 </v-col>
               </v-row>
@@ -59,7 +59,7 @@
               <p>현재 대기 순서: {{ currentPosition - 45 }}번째 입니다.</p>
             </v-card-text>
             <v-card-actions>
-              <v-btn @click="handleDialogClose" style="color:#787878; font-family: 'Noto Serif KR', serif;">닫기</v-btn>
+              <v-btn @click="handleDialogClose" style="color:#787878; font-size: 15px; font-family: 'Noto Serif KR', serif;">닫기</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -71,7 +71,7 @@
 
 <script>
 import { EventSourcePolyfill } from 'event-source-polyfill';
-import axios from '@/axios'
+import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 
 export default {
@@ -141,7 +141,7 @@ export default {
         try {
           const decodedToken = jwtDecode(token)
           const email = decodedToken.sub
-          const response = await axios.post('/submit', null, { params: { email: email } })
+          const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/submit`, null, { params: { email: email } })
 
           if (response.data && response.data.status_code === 200) {
             const { requestId, position } = response.data.result
@@ -184,7 +184,7 @@ export default {
         const email = decodedToken.sub
 
         // SSE 연결을 초기화하고 이메일을 쿼리 파라미터로 전달
-        this.eventSource = new EventSource(`http://localhost:8080/subscribe?email=${encodeURIComponent(email)}`)
+        this.eventSource = new EventSource(`${process.env.VUE_APP_API_BASE_URL}/subscribe?email=${encodeURIComponent(email)}`)
 
         this.eventSource.onopen = () => {
           // console.log("SSE 연결이 성공적으로 열렸습니다:", this.eventSource.url)
@@ -259,7 +259,7 @@ export default {
       this.closeSSEConnection() // SSE 연결 종료
 
       if (this.requestId) {
-        axios.delete(`/leave/${this.requestId}`)
+        axios.delete(`${process.env.VUE_APP_API_BASE_URL}/leave/${this.requestId}`)
           .then(response => {
             if (response.status === 204) {
               this.requestId = ""
@@ -284,7 +284,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .login-nav {
   z-index: 10;
   margin-top: -25px;

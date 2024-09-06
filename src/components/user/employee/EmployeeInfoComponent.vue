@@ -92,6 +92,7 @@
                       color: white;
                       background-color: #7a6c5b;
                       margin-right: 10px;
+                      font-size: 15px;
                     "
                     @click="openModifyDialog"
                   >
@@ -186,7 +187,7 @@
   
   <script>
   import EmployeeView from "@/views/EmployeeView.vue";
-  import axios from "@/axios";
+  import axios from "axios";
   
   export default {
     components: {
@@ -210,7 +211,7 @@
       };
     },
     async created() {
-      const response = await axios.get(`/employee/detail`);
+      const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/employee/detail`);
       const employeeDetail = response.data.result;
   
       this.empNo = employeeDetail.employeeNumber;
@@ -232,7 +233,7 @@
       async changePassword() {
         try {
           if (this.afterPassword === this.passwordCheck) {
-              const response = await axios.put(`/employee/modify`,
+              const response = await axios.put(`${process.env.VUE_APP_API_BASE_URL}/employee/modify`,
               {
                   beforePassword: this.beforePassword,
                   afterPassword: this.afterPassword,

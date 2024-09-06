@@ -31,7 +31,9 @@ export default {
     },
     methods: {
         closeDialog() {
-            this.dialog = false;
+            console.log("하이하이");
+            this.$emit('input', false)
+            console.log("나감");
         },
         async confirmDelete() {
             try {
@@ -46,10 +48,6 @@ export default {
 </script>
 
 <style scoped>
-.modal {
-    font-family: "Noto Serif KR", serif;
-    font-size: 16px;
-}
   .leftbtn {
     margin-right: -8px;
   }

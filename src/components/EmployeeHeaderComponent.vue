@@ -6,17 +6,17 @@
       <v-row align="center" no-gutters class="flex-nowrap justify-space-between">
       <!-- 좌측 버튼들 -->
       <v-col class="d-flex justify-start" cols="auto">
-        <v-btn @click="openDiningReservationModal()" class="mx-2">Dining({{ newDiningReservationCount }})</v-btn>
-        <v-btn @click="openRoomReservationModal()" class="mx-2">Room({{ newReservationCount }})</v-btn>
-        <v-btn @click="openMemberDialog" class="mx-2">Member</v-btn>
-        <v-btn v-if="department === 'Office'" :to="{ path: `/employee/${dept}` }" class="mx-2">{{ manage }}</v-btn>
-        <v-btn v-else @click="openManageDialog" class="mx-2">{{ manage }}</v-btn>
+        <v-btn @click="openDiningReservationModal()" class="mx-2 flint-hotel-title" style="color: black;">Dining({{ newDiningReservationCount }})</v-btn>
+        <v-btn @click="openRoomReservationModal()" class="mx-2 flint-hotel-title" style="color: black;">Room({{ newReservationCount }})</v-btn>
+        <v-btn @click="openMemberDialog" class="mx-2 flint-hotel-title" style="color: black;">Member</v-btn>
+        <v-btn v-if="department === 'Office'" :to="{ path: `/employee/${dept}` }" class="mx-2 flint-hotel-title" style="color: black;">{{ manage }}</v-btn>
+        <v-btn v-else @click="openManageDialog" class="mx-2 flint-hotel-title" style="color: black;">{{ manage }}</v-btn>
       </v-col>
       <!-- 우측 버튼들 -->
       <v-col class="d-flex justify-end" cols="auto">
-        <v-btn class="flint-hotel-title" :to="{ path: '/employee' }">HOME</v-btn>
-        <v-btn v-if="!isLogin" :to="{ path: '/employee/login' }" class="mx-2">Login</v-btn>
-        <v-btn v-else-if="isLogin" @click="Logout()" class="mx-2">Logout</v-btn>
+        <v-btn class="mx-2 flint-hotel-title" :to="{ path: '/employee' }" style="color: black;">HOME</v-btn>
+        <v-btn v-if="!isLogin" :to="{ path: '/employee/login' }" class="mx-2 flint-hotel-title" style="color: black;">Login</v-btn>
+        <v-btn v-else-if="isLogin" @click="Logout()" class="mx-2 flint-hotel-title" style="color: black;">Logout</v-btn>
       </v-col>
     </v-row>
 
@@ -28,12 +28,12 @@
             <v-row class="button-row" justify="center">
               <v-col cols="6" md="6" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" style="color: black; background-color: #E5E5E5; 
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none;"
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 15px;"
                   @click="memberListBtn">Member List</v-btn>
               </v-col>
               <v-col cols="6" md="6" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" style="color: black; background-color: #E5E5E5;
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none;"
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 15px;"
                   @click="qnaManageBtn">QnA Manage</v-btn>
               </v-col>
             </v-row>
@@ -50,10 +50,10 @@
             <v-row class="button-row" justify="center">
               <v-col cols="12" md="8" class="d-flex justify-center">
                 <v-btn class="custom-btn" size="large" v-if="isDining" @click="navigateToMenu" style="color: black; background-color: #E5E5E5; 
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none;">Menu
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 15px;">Menu
                   Manage</v-btn>
                 <v-btn class="custom-btn" size="large" v-if="isRoom" @click="navigateToMenu" style="color: black; background-color: #E5E5E5; 
-                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none;">Room
+                  padding-top:10px; padding-bottom:30px; width: 100%; max-width: 160px; border: none; font-size: 15px;">Room
                   Price</v-btn>
               </v-col>
             </v-row>
@@ -80,7 +80,7 @@
             </div>
           </v-card-text>
           <v-card-actions>
-            <v-btn @click="closeDiningReservationModal">Close</v-btn>
+            <v-btn @click="closeDiningReservationModal" style="color: black; font-size: 16px;">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -105,7 +105,7 @@
           </v-card-text>
           <v-card-actions>
             <!-- <v-btn @click="goToRoomReservationDetails">Details</v-btn> -->
-            <v-btn @click="closeRoomReservationModal">Close</v-btn>
+            <v-btn @click="closeRoomReservationModal" style="color: black; font-size: 16px;">Close</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -325,9 +325,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .flint-hotel-title {
-  font-size: 24px;
+  font-size: 14px !important;
   font-family: "Playfair Display", serif;
 }
 

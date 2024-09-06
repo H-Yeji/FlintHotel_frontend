@@ -6,9 +6,9 @@
                 <v-form @submit.prevent="confirmEditMenu">
                     <v-text-field v-model="localMenuData.originalCost" label="Before Price" readonly></v-text-field>
                     <v-text-field v-model="localMenuData.cost" label="After Price" type="number" :min="0"></v-text-field>
-                    <v-row style="margin-left:30px; margin-top:8px; margin-bottom:8px;">
-                        <v-btn class="submitButton" type="submit" style="width:90px">Submit</v-btn>
-                        <v-btn class="cancelButton" @click="closeDialog" style="width:90px">Cancel</v-btn>
+                    <v-row style="margin-left:23%; margin-top:8px; margin-bottom:8px;">
+                        <v-btn class="submitButton" type="submit" style="width:90px; background-color: #7A6C5B; margin-right:3px;">Submit</v-btn>
+                        <v-btn class="cancelButton" @click="closeDialog" style="width:90px; background-color: #7A6C5B; margin-left: 3px;">Cancel</v-btn>
                     </v-row>
                 </v-form>
             </v-card-text>

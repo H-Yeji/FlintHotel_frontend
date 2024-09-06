@@ -71,7 +71,7 @@
           </v-row>
           <v-row>
             <v-col cols="12">
-              <v-btn @click="employeeCreate" class="createBtn" style="background-color: #7A6C5B; color:white;">Add Employee</v-btn>
+              <v-btn @click="employeeCreate" class="createBtn" style="background-color: #7A6C5B; color:white; font-size: 15px;">Add Employee</v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -82,7 +82,7 @@
   
   <script>
   import EmployeeView from '@/views/EmployeeView.vue'
-  import axios from '@/axios'
+  import axios from 'axios'
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
 
@@ -127,7 +127,7 @@
                       employeeRank : '사원'
                   }
                   const token = localStorage.getItem('employeetoken') 
-                  const response = await axios.post('/employee/create', createData, {
+                  const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/employee/create`, createData, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

@@ -127,7 +127,7 @@
   <script scoped>
   import FlintView from '@/views/FlintView.vue';
   import dayjs from 'dayjs';
-  import axios from '@/axios';
+  import axios from 'axios';
 
   export default {
     components: {
@@ -174,7 +174,7 @@
         };
 
         try {
-          const response = await axios.get(`/reserve/room/remain`, {params});
+          const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/reserve/room/remain`, {params});
           console.log(response);
           this.roomList = response.data;
 
@@ -249,6 +249,7 @@
     color: white; 
     background-color: #7A6C5B;
     transition: background-color 0.3s ease; 
+    font-family: "Noto Serif KR", serif;
   }
   .date-label {
     font-family: "Noto Serif KR", serif;

@@ -74,7 +74,7 @@
                             <v-btn class="leftbtn" style="color: white;" color="#7A6C5B"
                             @click="$router.push({ name: 'QnaModComponent', params: { id: this.$route.params.id } })"
                             >Modify</v-btn>
-                            <v-btn style="color: white;" color="#CFB18E"
+                            <v-btn style="color: white; margin-right: 10px;" color="#CFB18E"
                             @click="openDeleteDialog"
                             >Delete</v-btn>
                         </v-row>
@@ -83,7 +83,7 @@
             </v-col>
         </v-row>
         <!-- 모달 -->
-        <v-dialog v-model="dialog" max-width="400px">
+        <v-dialog class="modal" v-model="dialog" max-width="400px">
             <v-card class="modal">
                 <v-card-title>정말 삭제하시겠습니까?</v-card-title>
                 <v-card-actions>
@@ -99,7 +99,7 @@
   
   <script>
   import QnaView from '@/views/QnaView.vue';
-  import axios from '@/axios';
+  import axios from 'axios';
   export default {
     components: {
         QnaView
@@ -122,7 +122,7 @@
         async fetchQnaDetail(qnaId) {
             try {
                 // qna detail
-                const response = await axios.get(`/mypage/qna/detail/${qnaId}`);
+                const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/mypage/qna/detail/${qnaId}`);
                 console.log(response.data);
 
                 this.service = response.data.result.service;
@@ -152,7 +152,7 @@
         async deleteReservation() {
             try {
                 const qnaId = this.$route.params.id;
-                await axios.get(`/mypage/qna/delete/${qnaId}`);
+                await axios.get(`${process.env.VUE_APP_API_BASE_URL}/mypage/qna/delete/${qnaId}`);
 
                 this.$router.push(`/mypage/qna/list`);
             } catch(e) {
@@ -222,6 +222,10 @@
     color: #787878;
   }
   .leftbtn {
-    margin-right: -8px;
+    margin-right: 5px;
   }
+  .modal {
+  padding: 20px;
+  font-family: "Noto Serif KR", serif;
+}
   </style>
