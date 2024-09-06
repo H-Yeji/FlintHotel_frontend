@@ -69,9 +69,6 @@ export default {
   created() {
     this.loadList();
   },
-  mounted() {
-    window.location.reload();
-  },
   methods: {
     async loadList() {
       try {
