@@ -49,6 +49,7 @@
                                                 <td>{{ q.memberEmail }}</td>
                                                 <td>{{ formatDate(q.writeTime) }}</td>
                                                 <td>{{ q.service }}</td>
+                                                <td>{{ q.option }}</td>
                                             </tr>
                                         </template>
                                     </v-data-table>
@@ -95,7 +96,8 @@ export default {
                 { title: 'Title', value: 'title', align: "center" },
                 { title: 'Email', value: 'memberEmail', align: "center" },
                 { title: 'Write Time', value: 'writeTime', align: "center" },
-                { title: 'Service', value: 'service', align: "center" }
+                { title: 'Service', value: 'service', align: "center" },
+                { title: 'Respond', value: 'option', align: "center"}
             ],
             pageSize: 10, // 페이지당 항목 수
             currentPage: 1, // 현재 페이지 번호
