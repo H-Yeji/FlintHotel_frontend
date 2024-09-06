@@ -279,7 +279,6 @@ export default {
     goInquiry() {
       this.count = 0;
       this.$router.push('/mypage/qna/list')
-      window.location.reload();
     }
   },
 };

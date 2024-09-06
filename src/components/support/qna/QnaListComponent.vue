@@ -67,6 +67,7 @@ export default {
     };
   },
   created() {
+    window.location.reload();
     this.loadList();
   },
   methods: {
