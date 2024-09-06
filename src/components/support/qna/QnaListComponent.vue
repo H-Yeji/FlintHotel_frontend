@@ -35,6 +35,7 @@
                     </td>
                     <td>{{ item.memberEmail }}</td>
                     <td>{{ formatDate(item.writeTime)}}</td>
+                    <td>{{ item.option }}</td>
                   </tr>
                 </template>
               </v-data-table>
@@ -61,7 +62,7 @@ export default {
         { title: "Title", key: "title", align: "center" },
         { title: "Email", key: "memberEmail", align: "center" },
         { title: "Write time", key: "writeTime", align: "center" },
-        // {title:'Modify', align:'center'}
+        { title: "Respond", key: "option", align: "center" }
       ],
     };
   },

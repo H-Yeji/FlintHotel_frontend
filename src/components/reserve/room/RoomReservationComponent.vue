@@ -85,39 +85,39 @@
               </v-col>
             </v-row>
           </v-card-text>
-        </v-card>
 
-        <!-- 객실 목록 -->
-        <v-row v-if="showRoom">
-          <v-col>
-            <v-card>
-              <v-card-text class="selectCard">
-                <v-table>
-                  <thead>
-                    <tr>
-                      <th style="padding-left: 50px;">Room Image</th>
-                      <th style="padding-left: 50px;">Room Name</th>
-                      <th style="padding-left: 50px;">Room Base Price</th>
-                      <th style="padding-left: 50px;"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(room, index) in roomList" :key="index">
-                      <td style="padding-left: 50px;">
-                        <v-img :src="room.imagePath" style="height:100px; width:auto;"></v-img>
-                      </td>
-                      <td style="padding-left: 50px;">{{ room.roomTypeName }}</td>
-                      <td style="padding-left: 50px;">{{ room.roomPrice.toLocaleString() }}원 ~</td>
-                      <td style="padding-left: 50px;">
-                        <v-btn @click="selectRoom(index)" style="color: white;" color="#CFB18E">Select</v-btn>
-                      </td>
-                    </tr>
-                  </tbody>
-                </v-table>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row> 
+          <!-- 객실 목록 -->
+          <v-row v-if="showRoom">
+            <v-col>
+              <v-card class="selectCard">
+                <v-card-text>
+                  <v-table>
+                    <thead>
+                      <tr>
+                        <th style="padding-left: 50px;">Room Image</th>
+                        <th style="padding-left: 50px;">Room Name</th>
+                        <th style="padding-left: 50px;">Room Base Price</th>
+                        <th style="padding-left: 50px;"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(room, index) in roomList" :key="index">
+                        <td style="padding-left: 50px;">
+                          <v-img :src="room.imagePath" style="height:100px; width:auto;"></v-img>
+                        </td>
+                        <td style="padding-left: 50px;">{{ room.roomTypeName }}</td>
+                        <td style="padding-left: 50px;">{{ room.roomPrice.toLocaleString() }}원 ~</td>
+                        <td style="padding-left: 50px;">
+                          <v-btn @click="selectRoom(index)" style="color: white;" color="#CFB18E">Select</v-btn>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </v-table>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row> 
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -213,7 +213,7 @@
   };
   </script>
   
-<style>
+<style scoped>
   html,
   body,
   #app,
@@ -251,6 +251,11 @@
     transition: background-color 0.3s ease; 
     font-family: "Noto Serif KR", serif;
   }
+
+  .room-list-container {
+  z-index: 1; /* 다른 요소들보다 뒤에 위치하도록 설정 */
+  position: relative; /* z-index가 적용되도록 position 설정 */
+}
   .date-label {
     font-family: "Noto Serif KR", serif;
     font-size: 13px;
@@ -273,6 +278,8 @@
     overflow: visible !important;
   }
   .selectCard {
+    border: none;
+    box-shadow: none;
     font-family: "Noto Serif KR", serif;
   }
   
