@@ -2,7 +2,6 @@
   <div>
     <FlintView />
     <!-- 회원가입 폼 -->
-    <!-- <v-main class="main-background"> -->
       <v-container class="join-now-container">
         <v-row>
           <v-col cols="12">
@@ -39,21 +38,21 @@
           </v-col>
           <v-col cols="12" md="6">
             <v-text-field 
-              label="BIRTHDAY" 
-              v-model="birthday"
-              placeholder="YYYY-MM-DD"
-              required
-              @click="showCalendar()"
-            ></v-text-field>
-            <v-calendar
-              v-model="selectedDate" 
-              class="calendar"
-              :attributes="calendarAttributes"
-              is-range
-              is-month-picker
-              :style="{ width: '380px', height: '270px', borderRadius: '7px', display:'none'}"
-              @dayclick="handleDateChange">
-            </v-calendar>
+            label="BIRTHDAY" 
+            v-model="birthday"
+            placeholder="YYYY-MM-DD"
+            required
+            @click="showCalendar"
+          ></v-text-field>
+          <v-calendar
+            v-model="selectedDate" 
+            class="calendar"
+            :attributes="calendarAttributes"
+            is-range
+            is-month-picker
+            :style="{ width: '380px', height: '270px', borderRadius: '7px', display: isCalendarVisible ? 'block' : 'none' }"
+            @dayclick="handleDateChange"
+          ></v-calendar>
             <v-text-field 
               label="PHONE NUMBER *" 
               v-model="phoneNumber"
@@ -77,7 +76,6 @@
         >
         </EmailVerifyModal>
       </v-container>
-    <!-- </v-main> -->
   </div>
 </template>
 
@@ -102,6 +100,7 @@ export default {
     const phoneNumber = ref('')
     const nation = ref('')
     const emailVerify = ref(false)
+    const isCalendarVisible = ref(false)
 
     const SignUp = async () => {
       // 입력값이 모두 채워져 있는지 확인
@@ -131,17 +130,16 @@ export default {
     }
 
     const showCalendar = () => {
-      const element = document.getElementsByClassName('calendar');
-      element[0].style.display = 'block';
+      isCalendarVisible.value = true;  // 달력을 보이게 설정
     }
 
     const handleDateChange = (date) => {
-      birthday.value = date.id
-
-      const element = document.getElementsByClassName('calendar');
-      element[0].style.display = 'none';
+      // 날짜 선택 후에만 달력 숨기기
+      if (date && date.id) {
+        birthday.value = date.id;  // YYYY-MM-DD 형식으로 선택된 날짜 설정
+        isCalendarVisible.value = false;  // 날짜 선택 후 달력 숨김
+      }
     }
-
 
     return {
       email,
@@ -154,7 +152,8 @@ export default {
       emailVerify,
       SignUp,
       showCalendar,
-      handleDateChange
+      handleDateChange,
+      isCalendarVisible
     }
   },
 }
@@ -174,15 +173,13 @@ export default {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     overflow-y: auto;
-    color: grey;
   }
 .korFont {
   font-family: "Noto Serif KR", serif;
-  color: grey; 
 }
 .emailBtn {
   font-family: "Noto Serif KR", serif;
-  background-color: grey;
+  background-color: #7A6C5B;
   color: white;
   margin-left: 85%;
 }
